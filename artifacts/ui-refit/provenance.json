@@ -205,5 +205,32 @@
     "width": 1440,
     "height": 1050,
     "caption": "자동화된 실제 UI 조작 기록. 수치는 가상 fixture이며 서비스 성능 측정이 아닙니다."
-  }
+  },
+  "uiSources": [
+    {
+      "path": "index.html",
+      "bytes": 3028,
+      "sha256": "6e57fcc57cfb9e76fe3ded7d335dec8f5b304889c2ca9a113553dd03cb11e0ca",
+      "committedAtCaptureCommit": "72090bc3d5f97b1719995b895d40199e1cd75af8"
+    },
+    {
+      "path": "style.css",
+      "bytes": 3613,
+      "sha256": "f7ff857c7f0704a5b68822b8ed62ef80debb5c3ade491778a5ddac35d569cffa",
+      "committedAtCaptureCommit": "72090bc3d5f97b1719995b895d40199e1cd75af8"
+    },
+    {
+      "path": "app.mjs",
+      "bytes": 8585,
+      "sha256": "c80ace5614946038367f6ebf705e913527fc2218705873510818b1decee364cc",
+      "committedAtCaptureCommit": "72090bc3d5f97b1719995b895d40199e1cd75af8"
+    },
+    {
+      "path": "ui-refit-check.py",
+      "bytes": 9151,
+      "sha256": "5b294a2895f23ec2a568ec691fe8615bb71a7c9fa291f86139ee31a31aa4b3cd",
+      "committedAtCaptureCommit": "72090bc3d5f97b1719995b895d40199e1cd75af8"
+    }
+  ],
+  "uiSourceProvenance": "Final UI sources used by the existing actual browser capture; files and media unchanged by this provenance-only addition."
 }
