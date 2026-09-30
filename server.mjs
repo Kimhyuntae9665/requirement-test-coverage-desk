@@ -20,7 +20,9 @@ export function createDesk(){
     if(url.pathname==='/api/propose'){
      if(input.mode==='invalid_json'){modelState=parseModel(data,'{broken');proposals=[];}
      else if(input.mode==='timeout'){modelState={status:'model_timeout',message:'Injected demo failure. No inference occurred.'};proposals=[];}
-     else {proposals=proposeExplicit(data);modelState={status:'explicit_links',message:'CPU assertion anchors proposed. Human semantic acceptance still required.'};}
+     else if(input.mode==='archived_model'){
+      try {const evaluation=JSON.parse(await readFile(root+'artifacts/model-evaluation.json','utf8'));proposals=evaluation.attempts.flatMap(a=>a.results.filter(x=>x.validation.valid&&x.validation.status==='supported').map(x=>x.proposal));modelState={status:'archived_model',message:evaluation.evaluationAttempts+' recorded Qwen evaluation attempts; revalidated source snapshots; no live inference.'};}catch{proposals=[];modelState={status:'model_unavailable',message:'Recorded evaluation artifact unavailable. Explicit links remain usable.'};}
+     }else {proposals=proposeExplicit(data);modelState={status:'explicit_links',message:'CPU assertion anchors proposed. Human semantic acceptance still required.'};}
     }else if(url.pathname==='/api/accept'){
      const p=proposals.find(p=>p.requirementId===input.requirementId&&p.testId===input.testId);
      if(!p)return json(409,{error:'proposal_unavailable'});
