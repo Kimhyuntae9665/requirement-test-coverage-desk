@@ -1,0 +1,38 @@
+{
+  "browser": "Google Chrome via Playwright",
+  "expectation": "vulnerable",
+  "modelCalls": 0,
+  "servicePerformanceMeasured": false,
+  "races": [
+    {
+      "attempt": 1,
+      "capturedBeforeRevocation": true,
+      "deliveredAfterRevocation": true,
+      "restoredT10": true,
+      "accessibleTestsAfterLateResponse": 12
+    },
+    {
+      "attempt": 2,
+      "capturedBeforeRevocation": true,
+      "deliveredAfterRevocation": true,
+      "restoredT10": true,
+      "accessibleTestsAfterLateResponse": 12
+    },
+    {
+      "attempt": 3,
+      "capturedBeforeRevocation": true,
+      "deliveredAfterRevocation": true,
+      "restoredT10": true,
+      "accessibleTestsAfterLateResponse": 12
+    }
+  ],
+  "twoReviewerAcceptance": {
+    "oldRequirementRevision": 1,
+    "replacementRequirementRevision": 2,
+    "replacementFacets": [
+      "F2"
+    ],
+    "oldClickStatus": 200,
+    "replacementAcceptedByOldClick": true
+  }
+}

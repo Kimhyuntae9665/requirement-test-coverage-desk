@@ -1,0 +1,44 @@
+{
+  "browser": "Google Chrome via Playwright",
+  "expectation": "fixed",
+  "modelCalls": 0,
+  "servicePerformanceMeasured": false,
+  "races": [
+    {
+      "attempt": 1,
+      "capturedBeforeRevocation": true,
+      "deliveredAfterRevocation": true,
+      "restoredT10": false,
+      "accessibleTestsAfterLateResponse": 11
+    },
+    {
+      "attempt": 2,
+      "capturedBeforeRevocation": true,
+      "deliveredAfterRevocation": true,
+      "restoredT10": false,
+      "accessibleTestsAfterLateResponse": 11
+    },
+    {
+      "attempt": 3,
+      "capturedBeforeRevocation": true,
+      "deliveredAfterRevocation": true,
+      "restoredT10": false,
+      "accessibleTestsAfterLateResponse": 11
+    }
+  ],
+  "twoReviewerAcceptance": {
+    "oldRequirementRevision": 1,
+    "replacementRequirementRevision": 2,
+    "replacementFacets": [
+      "F2"
+    ],
+    "oldClickStatus": 409,
+    "replacementAcceptedByOldClick": false,
+    "freshDeliberateClickStatus": 200
+  },
+  "serializedMutationOrder": [
+    "r1-error-code",
+    "revoke-t10"
+  ],
+  "laterReadWaitedForBothMutationCommits": true
+}

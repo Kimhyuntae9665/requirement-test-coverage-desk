@@ -17,7 +17,7 @@ async def main():
         await page.locator('#propose').click();await page.wait_for_timeout(400)
         await page.locator('#links button').click();await page.wait_for_timeout(300)
         assert 'accepted' in await page.locator('#matrix tr').first.inner_text()
-        await page.evaluate("fetch('/api/accept',{method:'POST',body:JSON.stringify({requirementId:'R1',testId:'T3'})})")
+        await page.evaluate("async()=>{const s=await(await fetch('/api/state')).json();const p=s.proposals.find(p=>p.requirementId==='R1'&&p.testId==='T3');return fetch('/api/accept',{method:'POST',body:JSON.stringify({requirementId:'R1',testId:'T3',inspection:p})});}")
         await page.reload();await page.wait_for_selector('#matrix tr');assert '1' in await page.locator('#stats .stat').nth(2).inner_text()
         await page.screenshot(path=str(out/'02-accepted.png'),full_page=True)
         await page.get_by_role('button',name='R1 code revision',exact=True).click();await page.wait_for_timeout(350)

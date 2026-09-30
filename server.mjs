@@ -1,13 +1,15 @@
 import http from 'node:http';
+import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {fixtures} from './fixture.mjs';
 import {proposeExplicit,validateProposal,accept,summarize,mutate,parseModel,executionEvidence} from './core.mjs';
 const root=fileURLToPath(new URL('.',import.meta.url));
 export function createDesk(){
- let data=fixtures(), reviews=[], proposals=[], modelState={status:'not_requested',message:'Optional Qwen evaluation is offline; no model called by this desk.'};
+ let data=fixtures(), reviews=[], proposals=[], proposalGeneration=0, modelState={status:'not_requested',message:'Optional Qwen evaluation is offline; no model called by this desk.'};
+ const reviewToken=p=>createHash('sha256').update(JSON.stringify({generation:proposalGeneration,proposal:p})).digest('hex');
  const visible=()=>({...data,tests:data.tests.filter(t=>t.accessible),runs:data.runs.filter(r=>data.tests.some(t=>t.id===r.testId&&t.accessible))});
- const state=()=>({data:visible(),definitionSupport:proposeExplicit(data),reviews:reviews.filter(r=>data.tests.some(t=>t.id===r.proposal?.testId&&t.accessible)),proposals:proposals.filter(p=>data.tests.some(t=>t.id===p.testId&&t.accessible)).map(p=>({...p,validation:validateProposal(data,p)})),summary:summarize(data,reviews),testEvidence:data.tests.filter(t=>t.accessible).map(t=>({testId:t.id,requirements:data.requirements.map(r=>({requirementId:r.id,...executionEvidence(data,t.id,r.id)}))})),modelState});
+ const state=()=>({data:visible(),definitionSupport:proposeExplicit(data),reviews:reviews.filter(r=>data.tests.some(t=>t.id===r.proposal?.testId&&t.accessible)),proposals:proposals.filter(p=>data.tests.some(t=>t.id===p.testId&&t.accessible)).map(p=>({...p,reviewToken:reviewToken(p),validation:validateProposal(data,p)})),summary:summarize(data,reviews),testEvidence:data.tests.filter(t=>t.accessible).map(t=>({testId:t.id,requirements:data.requirements.map(r=>({requirementId:r.id,...executionEvidence(data,t.id,r.id)}))})),modelState});
  return http.createServer(async(req,res)=>{
   const json=(code,body)=>{res.writeHead(code,{'Content-Type':'application/json','Cache-Control':'no-store'});res.end(JSON.stringify(body));};
   try {
@@ -23,13 +25,16 @@ export function createDesk(){
      else if(input.mode==='archived_model'){
       try {const evaluation=JSON.parse(await readFile(root+'artifacts/model-evaluation.json','utf8'));proposals=evaluation.attempts.flatMap(a=>a.results.filter(x=>x.validation.valid&&x.validation.status==='supported').map(x=>x.proposal));modelState={status:'archived_model',message:evaluation.evaluationAttempts+' recorded Qwen evaluation attempts; revalidated source snapshots; no live inference.'};}catch{proposals=[];modelState={status:'model_unavailable',message:'Recorded evaluation artifact unavailable. Explicit links remain usable.'};}
      }else {proposals=proposeExplicit(data);modelState={status:'explicit_links',message:'CPU assertion anchors proposed. Human semantic acceptance still required.'};}
+     proposalGeneration++;
     }else if(url.pathname==='/api/accept'){
      const p=proposals.find(p=>p.requirementId===input.requirementId&&p.testId===input.testId);
-     if(!p)return json(409,{error:'proposal_unavailable'});
-     const v=validateProposal(data,p);if(!v.valid)return json(409,{error:'proposal_stale',issues:v.issues});
+     const stale=()=>json(409,{error:'proposal_stale',message:'Proposal changed. Inspect the refreshed sources and click Accept again.',state:state()});
+     const inspected=input.inspection;
+     if(!p||!inspected||inspected.reviewToken!==reviewToken(p)||!['requirementSourceId','testSourceId','requirementRevision','testRevision','requirementHash','testHash','requirementBaseline'].every(key=>inspected[key]===p[key]))return stale();
+     const v=validateProposal(data,p);if(!v.valid)return stale();
      const r=accept(data,p,'demo-reviewer');if(r.state!=='accepted')return json(409,{error:'semantic_coverage_unsupported'});reviews=reviews.filter(x=>!(x.proposal?.requirementId===p.requirementId&&x.proposal?.testId===p.testId));reviews.push(r);
     }else if(url.pathname==='/api/mutate')data=mutate(data,input.name);
-    else if(url.pathname==='/api/reset'){data=fixtures();reviews=[];proposals=[];modelState={status:'not_requested'};}
+    else if(url.pathname==='/api/reset'){proposalGeneration++;data=fixtures();reviews=[];proposals=[];modelState={status:'not_requested'};}
     else return json(404,{error:'unknown_action'});
     return json(200,state());
    }
