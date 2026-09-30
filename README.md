@@ -89,9 +89,9 @@ The archived run snapshot was reconstructed from its pre-inference source commit
 
 ## Validation and review
 
-CPU checks cover the original mapping, partial/union semantics, exact spans, source substitution, revision staleness, unrelated run isolation, timing boundaries, access revocation, malformed archived outputs and replayed source versions. Python tests mock HTTP; they check shared busy/blocked behavior, durable timeout barriers, symlink rejection, retained flock after marker failure, and retention even when artifact writes fail. No GPU call occurs in CI.
+**21 Node tests and 6 Python transport tests pass.** CPU checks cover the original mapping, partial/union semantics, exact spans, source substitution, revision staleness, unrelated run isolation, timing boundaries, access revocation, malformed archived outputs and replayed source versions. Python tests mock HTTP; they check shared busy/blocked behavior, durable timeout barriers, symlink rejection, retained flock after marker failure, and retention even when artifact writes fail. No GPU call occurs in CI.
 
-An [independent GPT-6 Astra review](docs/review.md) found and drove fixes to source identity, unrelated run eligibility, archived source binding, malformed proposal handling and lease retention. Actual [browser evidence](artifacts/media) covers repeated acceptance, stale review, failed timing fixture, stale APP-0 execution, access revocation, removed assertions, recorded proposals, and injected failure states. Diagram/readme resources are checked at 360px and 390px as well as desktop; matrix columns remain scrollable on narrow screens.
+An [independent GPT-6 Astra review](docs/review.md) found and drove fixes to source identity, unrelated run eligibility, archived source binding, malformed proposal handling and lease retention. The final review confirmed all reported blockers resolved. Actual [browser evidence](artifacts/media) covers repeated acceptance, stale review, failed timing fixture, stale APP-0 execution, access revocation, removed assertions, recorded proposals, and injected failure states. [Published README checks](artifacts/published-checks.json) verify successful live GitHub image loading at 360px, 390px and 1440px (natural 420 × 700, displayed 294px, 324px and 420px respectively). Matrix columns remain scrollable on narrow screens.
 
 ## Enterprise context
 

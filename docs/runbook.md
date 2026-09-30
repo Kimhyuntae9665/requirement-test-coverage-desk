@@ -28,6 +28,8 @@ A 60-second HTTP timeout does not prove server cancellation. The client writes a
 
 The model has no tools and cannot run tests, execute jobs, contact factory systems, or accept semantic coverage. Model requests omit the gold and structured anchors. Rules bind each proposal to the captured source snapshot and reject wrong IDs, versions, access or spans. The evaluator reads gold after inference to score facet links; runtime desk and model client never import evaluator gold.
 
+Source manifests bind the input digest and captured fixture identities before future calls. The original recorded evaluation was checked against its original committed fixture during review, with each request compared to the recovered manifest. That manifest is explicitly marked reconstructed. Re-scoring an archive never substitutes current source revisions for its captured revisions.
+
 ## Reproduce browser evidence
 
 `capture.py` uses an existing Google Chrome through Python Playwright and records actual UI actions. It includes zero coverage, repeated acceptance, revised source staleness, fictional current execution, 2001ms failure, APP-0 staleness, access revocation, and explicitly injected model errors. The injected errors test UI recovery and are not claimed as actual Qwen failures. No autonomous service test execution occurs.
