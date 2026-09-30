@@ -1,0 +1,311 @@
+{
+  "requirements": [
+    {
+      "id": "R1",
+      "status": "approved",
+      "text": "A cancelled order returns 409 / ORDER_CANCELLED and creates no new print job.",
+      "facets": [
+        {
+          "id": "F1",
+          "text": "409 with ORDER_CANCELLED"
+        },
+        {
+          "id": "F2",
+          "text": "No new print job"
+        }
+      ]
+    },
+    {
+      "id": "R2",
+      "status": "approved",
+      "text": "The same payload and key return the original receipt and exactly one total matching job.",
+      "facets": [
+        {
+          "id": "F1",
+          "text": "Original receipt returned"
+        },
+        {
+          "id": "F2",
+          "text": "Exactly one total matching job"
+        }
+      ]
+    },
+    {
+      "id": "R3",
+      "status": "approved",
+      "text": "A changed payload with the same key returns 409 / IDEMPOTENCY_CONFLICT and preserves the original receipt and payload.",
+      "facets": [
+        {
+          "id": "F1",
+          "text": "409 with IDEMPOTENCY_CONFLICT"
+        },
+        {
+          "id": "F2",
+          "text": "Original receipt and payload unchanged"
+        }
+      ]
+    },
+    {
+      "id": "R4",
+      "status": "approved",
+      "text": "A plant-A operator cannot obtain plant-B data through list, detail, or source/metadata.",
+      "facets": [
+        {
+          "id": "F1",
+          "text": "List excludes plant-B"
+        },
+        {
+          "id": "F2",
+          "text": "Detail denied without restricted fields"
+        },
+        {
+          "id": "F3",
+          "text": "Source/metadata denied without restricted fields"
+        }
+      ]
+    },
+    {
+      "id": "R5",
+      "status": "approved",
+      "text": "Under declared local mock load: five clients, forty successful requests each, every acknowledgement duration <= 2000 ms.",
+      "facets": [
+        {
+          "id": "F1",
+          "text": "Declared load and measured acknowledgement duration"
+        }
+      ]
+    },
+    {
+      "id": "R6",
+      "status": "draft",
+      "text": "The screen should be fast and easy.",
+      "facets": []
+    }
+  ],
+  "tests": [
+    {
+      "id": "T1",
+      "title": "R1 cancelled order handling",
+      "preconditions": [
+        {
+          "id": "T1.P1",
+          "text": "Order is released before requesting a label."
+        }
+      ],
+      "assertions": [
+        {
+          "id": "T1.A1",
+          "text": "Response status equals 201 and a job is created.",
+          "length": 48
+        }
+      ]
+    },
+    {
+      "id": "T2",
+      "title": "Cancelled response",
+      "preconditions": [
+        {
+          "id": "T2.P1",
+          "text": "Order is cancelled before requesting a label."
+        }
+      ],
+      "assertions": [
+        {
+          "id": "T2.A1",
+          "text": "Response status equals 409 and error code equals ORDER_CANCELLED.",
+          "length": 65
+        }
+      ]
+    },
+    {
+      "id": "T3",
+      "title": "Cancelled response and job count",
+      "preconditions": [
+        {
+          "id": "T3.P1",
+          "text": "Order is cancelled before requesting a label."
+        }
+      ],
+      "assertions": [
+        {
+          "id": "T3.A1",
+          "text": "Response status equals 409 and error code equals ORDER_CANCELLED.",
+          "length": 65
+        },
+        {
+          "id": "T3.A2",
+          "text": "After-job-count equals before-job-count.",
+          "length": 40
+        }
+      ]
+    },
+    {
+      "id": "T4",
+      "title": "Retry receipt",
+      "preconditions": [
+        {
+          "id": "T4.P1",
+          "text": "Submit the identical payload and idempotency key twice."
+        }
+      ],
+      "assertions": [
+        {
+          "id": "T4.A1",
+          "text": "Second response receipt equals the original receipt.",
+          "length": 52
+        }
+      ]
+    },
+    {
+      "id": "T5",
+      "title": "Conflict preserves original",
+      "preconditions": [
+        {
+          "id": "T5.P1",
+          "text": "Submit a different payload with the original idempotency key."
+        }
+      ],
+      "assertions": [
+        {
+          "id": "T5.A1",
+          "text": "Response status equals 409 and error code equals IDEMPOTENCY_CONFLICT.",
+          "length": 70
+        },
+        {
+          "id": "T5.A2",
+          "text": "Stored original receipt and original payload remain unchanged.",
+          "length": 62
+        }
+      ]
+    },
+    {
+      "id": "T6",
+      "title": "List plant isolation",
+      "preconditions": [
+        {
+          "id": "T6.P1",
+          "text": "Authenticate as a plant-A operator; plant-B resources exist."
+        }
+      ],
+      "assertions": [
+        {
+          "id": "T6.A1",
+          "text": "Plant-A list contains no plant-B records.",
+          "length": 41
+        }
+      ]
+    },
+    {
+      "id": "T7",
+      "title": "Configured timeout",
+      "preconditions": [
+        {
+          "id": "T7.P1",
+          "text": "Local mock service; five concurrent clients, forty successful requests per client."
+        }
+      ],
+      "assertions": [
+        {
+          "id": "T7.A1",
+          "text": "Configured timeout_ms equals 2000.",
+          "length": 34
+        }
+      ]
+    },
+    {
+      "id": "T8",
+      "title": "Measured local mock acknowledgements",
+      "preconditions": [
+        {
+          "id": "T8.P1",
+          "text": "Local mock service; five concurrent clients, forty successful requests per client."
+        }
+      ],
+      "assertions": [
+        {
+          "id": "T8.A1",
+          "text": "With five clients and forty successes each, all measured local mock acknowledgement durations are <= 2000 ms.",
+          "length": 109
+        }
+      ]
+    },
+    {
+      "id": "T9",
+      "title": "Retry receipt and single job",
+      "preconditions": [
+        {
+          "id": "T9.P1",
+          "text": "Submit the identical payload and idempotency key twice."
+        }
+      ],
+      "assertions": [
+        {
+          "id": "T9.A1",
+          "text": "Second response receipt equals the original receipt.",
+          "length": 52
+        },
+        {
+          "id": "T9.A2",
+          "text": "Exactly one total job matches this idempotency key.",
+          "length": 51
+        }
+      ]
+    },
+    {
+      "id": "T10",
+      "title": "Known cross-plant detail and source",
+      "preconditions": [
+        {
+          "id": "T10.P1",
+          "text": "Authenticate as a plant-A operator; plant-B resources exist."
+        }
+      ],
+      "assertions": [
+        {
+          "id": "T10.A1",
+          "text": "Known plant-B detail returns 403 with no restricted fields.",
+          "length": 59
+        },
+        {
+          "id": "T10.A2",
+          "text": "Known plant-B source/metadata returns 403 with no restricted fields.",
+          "length": 68
+        }
+      ]
+    },
+    {
+      "id": "T11",
+      "title": "Current local mock acknowledgement fixture",
+      "preconditions": [
+        {
+          "id": "T11.P1",
+          "text": "Local mock service; five concurrent clients, forty successful requests per client."
+        }
+      ],
+      "assertions": [
+        {
+          "id": "T11.A1",
+          "text": "With five clients and forty successes each, all measured local mock acknowledgement durations are <= 2000 ms.",
+          "length": 109
+        }
+      ]
+    },
+    {
+      "id": "T12",
+      "title": "Fast screen colour check",
+      "preconditions": [
+        {
+          "id": "T12.P1",
+          "text": "Open the label-request screen."
+        }
+      ],
+      "assertions": [
+        {
+          "id": "T12.A1",
+          "text": "The fast and easy screen uses the expected title and colour.",
+          "length": 60
+        }
+      ]
+    }
+  ]
+}

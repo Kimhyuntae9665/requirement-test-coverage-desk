@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "frozenBeforeModelPrompt": true,
+  "description": "Original synthetic definition-coverage gold. Fictional run eligibility is separate from actual execution.",
+  "requirementBaseline": "REQ-1",
+  "softwareBaseline": "APP-1",
+  "supportedPairs": {
+    "R1:T2": ["F1"],
+    "R1:T3": ["F1", "F2"],
+    "R2:T4": ["F1"],
+    "R2:T9": ["F1", "F2"],
+    "R3:T5": ["F1", "F2"],
+    "R4:T6": ["F1"],
+    "R4:T10": ["F2", "F3"],
+    "R5:T8": ["F1"],
+    "R5:T11": ["F1"]
+  },
+  "unsupportedPairsPolicy": "Unlisted pairs are unsupported, not automatically contradictory.",
+  "definitionUnion": {"R1":"complete","R2":"complete","R3":"complete","R4":"complete","R5":"complete","R6":"clarify"},
+  "execution": {"T8":"stale","T11":"fixture-pass"},
+  "actualExecutionEvidence": "No fictional run is an actual measured service execution. Engine tests are separately executed."
+}

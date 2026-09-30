@@ -1,0 +1,2 @@
+# P05 scope
+Own only this project. Synthetic requirement/test review; no autonomous test execution, factory printing, ALM integration, or certification. Runtime must never import evaluator gold. Model suggestions require source validation and explicit human acceptance. No new weights. Use shared owner-only inference lease and persistent timeout barrier. Preserve unsuccessful model attempts. Public files must exclude private host details, credentials and internal transcripts.
