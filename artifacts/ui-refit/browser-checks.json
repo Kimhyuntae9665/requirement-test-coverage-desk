@@ -1,0 +1,92 @@
+{
+  "browser": "actual Google Chrome via Playwright",
+  "modelCalls": 0,
+  "actualServiceExecutions": 0,
+  "screenshots": [
+    "01-facet-matrix.png",
+    "02-original-source.png",
+    "03-proposed-link.png",
+    "04-accepted-receipt.png",
+    "05-stale-review.png",
+    "06-fictional-conflict.png",
+    "07-access-revoked.png",
+    "08-invalid-json.png",
+    "09-missing-assertions.png",
+    "10-mobile-390.png"
+  ],
+  "checks": [
+    "Keyboard source opens T2, focuses selector; native requirement disclosure opens with Enter",
+    "Proposals carry zero authority; acceptance disabled after one receipt; real repeated HTTP acceptance remains one receipt",
+    "Revocation removes T10 selection, assertions, source hash and reviewer receipt; count drops to 11",
+    "Invalid JSON clears proposals; timeout is explicitly injected; missing assertions disable acceptance; archived CPU revalidation and stale APP-0 remain distinct",
+    "Desktop source/result panels have equal widths",
+    "390px: single-line 28px title, no page overflow, keyboard-scrollable native table"
+  ],
+  "mobile390": {
+    "width": 390,
+    "scroll": 390,
+    "titleWidth": 358,
+    "titleScroll": 358,
+    "titleFont": "28px",
+    "titleLine": "nowrap",
+    "tableScroll": 760,
+    "tableClient": 324
+  },
+  "assets": [
+    {
+      "path": "01-facet-matrix.png",
+      "bytes": 158896,
+      "sha256": "0e42d3938f07d59ab2cd07c616a96720b10e8fb10e9560f77ea22313ad087160"
+    },
+    {
+      "path": "02-original-source.png",
+      "bytes": 157450,
+      "sha256": "03b6554c4d46845e0257dee4188644597e5ddc578ca6d1d75fac3d5fc0fbfe3c"
+    },
+    {
+      "path": "03-proposed-link.png",
+      "bytes": 142863,
+      "sha256": "0e737a838096f1a42a8ac1a804906ded2e7b649b04f47bae52e375f462054823"
+    },
+    {
+      "path": "04-accepted-receipt.png",
+      "bytes": 126328,
+      "sha256": "fd21e7cbce9cf623595b87950367cec801f2fa78f18e39af8644fc0a31703cab"
+    },
+    {
+      "path": "05-stale-review.png",
+      "bytes": 147780,
+      "sha256": "06c2d064d30ef3cf5ddc298eca81cb91f451a89a9f1dfb641ddca173094799bb"
+    },
+    {
+      "path": "06-fictional-conflict.png",
+      "bytes": 160894,
+      "sha256": "89fd9541193600316d4344dc7a58c25fa1583d2a72daf42a1406fb141e81516a"
+    },
+    {
+      "path": "07-access-revoked.png",
+      "bytes": 102550,
+      "sha256": "dc9669e8ae03ebbc867ab6eef6a981747a49f0bdebb3d127f55c0b6291363740"
+    },
+    {
+      "path": "08-invalid-json.png",
+      "bytes": 97588,
+      "sha256": "cabda9e3cc53bd845b997bc3f5b72d855dbb53265788c02b9f582ba63b14b931"
+    },
+    {
+      "path": "09-missing-assertions.png",
+      "bytes": 146445,
+      "sha256": "16fa220fc55460822fe1bf49be76c3d1887743d984783f8300be2d63674321a4"
+    },
+    {
+      "path": "10-mobile-390.png",
+      "bytes": 259493,
+      "sha256": "71796db30c857a85bcb440ec4da15d9a5e38faf268cf5f9cc2de401167d2c27f"
+    },
+    {
+      "path": "review-demo.webm",
+      "bytes": 1413074,
+      "sha256": "2dece7199f5e5a08ed9961bac9713be0ea0319cfed81114300f0eb650e5a46ec"
+    }
+  ]
+}

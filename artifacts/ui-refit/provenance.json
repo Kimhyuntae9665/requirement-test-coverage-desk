@@ -1,0 +1,209 @@
+{
+  "baselineCommit": "a76458f281f040b2ab9980e9dea4ebbc8c2b6d69",
+  "capture": "actual Google Chrome via existing Playwright, synthetic in-memory fixture",
+  "modelCallsDuringRefit": 0,
+  "actualServiceExecutions": 0,
+  "archivedModelEvaluationUnchanged": true,
+  "frozenFiles": [
+    {
+      "path": "fixture.mjs",
+      "bytes": 6803,
+      "sha256": "1f9cfab4a5e560bed4fe85133a831c1d7261e7df3fe983a95d2870ad092a1e9a",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "core.mjs",
+      "bytes": 11355,
+      "sha256": "8c0c200b54a32c6cbf38d62678a8a293c173cc615bddb2e65fa11a62d7834c64",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "server.mjs",
+      "bytes": 5087,
+      "sha256": "e28e7c33b7cb8c84b9f63f956e626462241ba5639710f245cd474bbdfdd33fa2",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "gold.json",
+      "bytes": 887,
+      "sha256": "b56742bb33f4be640fd2d28e4a9578bc25b96a708ac86b37068182526fdae2fa",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "model_client.py",
+      "bytes": 6015,
+      "sha256": "201d9584a27672b77d6ea51384f4c510a4e6c34507b727845096915ded8ff536",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "evaluate.mjs",
+      "bytes": 3300,
+      "sha256": "d4862ca5aa141aa984a61fa635b2d74281e0976f8b9a78baa1cfb994bfd3c399",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "source-snapshot.mjs",
+      "bytes": 2527,
+      "sha256": "441021961a4ecf9145697dbfbeec6a927e71beb706acdf7b9540caffdde87f7d",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "artifacts/model-attempts/T1.json",
+      "bytes": 5588,
+      "sha256": "8b8b32a9006ade322217d4d9c5df35b3089fada6daa87c6f288a832cc55091f9",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "artifacts/model-attempts/T10.json",
+      "bytes": 6244,
+      "sha256": "e00d0bcac4668d36396925da7acd33f3833093a967bf5607ad341484d9a23845",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "artifacts/model-attempts/T11.json",
+      "bytes": 5752,
+      "sha256": "4f0508be326e7bab66d3a9af54f3108e04531bed95e00d2ba4fd50a5b4d73f1c",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "artifacts/model-attempts/T12.json",
+      "bytes": 5582,
+      "sha256": "b7be17097caeb719a5f1ca587b22af3fae84d50cef8c05bb559ff61d43ebebdd",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "artifacts/model-attempts/T2.json",
+      "bytes": 5846,
+      "sha256": "f7079d963f3e95af426b3308e32fa92effd95f61746e1ddc1e4e4a2d192e7bc5",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "artifacts/model-attempts/T3.json",
+      "bytes": 5928,
+      "sha256": "ad5f32ab36f4dd486141c15d7e66d0a608977ffdefc6cb157b72d338fee44cdb",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "artifacts/model-attempts/T4.json",
+      "bytes": 5812,
+      "sha256": "d229f7c66705adce2b5d1919ca23c42334ff898f51b6c7a0f09a098a005717ca",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "artifacts/model-attempts/T5.json",
+      "bytes": 5993,
+      "sha256": "6ee85a9310e6810e342ee4fff48bbfdb17218de521fa83029a2f08d2c8831321",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "artifacts/model-attempts/T6.json",
+      "bytes": 6018,
+      "sha256": "35ced83bc4389cbdb45eec400189d87f4865353ea2f2d495c7c61c1ce77714b5",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "artifacts/model-attempts/T7.json",
+      "bytes": 5570,
+      "sha256": "278113ecb491e00a8cdaaceccd77ae309e445b067dc8a87d3d6a381b09b95888",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "artifacts/model-attempts/T8.json",
+      "bytes": 5740,
+      "sha256": "07f8caa0f73751da8bffd1b999fc9c11d13247bb2b4e02352c45ec0fa5ad703b",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "artifacts/model-attempts/T9.json",
+      "bytes": 5930,
+      "sha256": "da04223e3e7235d5dbcaaa43b16087e251676c739fb16295e9f0a41ee487add1",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "artifacts/model-evaluation.json",
+      "bytes": 30464,
+      "sha256": "0b95078f46636ef2df982527ad092655a5572fab5ee1f9074660ac3a56863795",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "artifacts/model-input.json",
+      "bytes": 7754,
+      "sha256": "9e9c2c039b1cd687e734a78b615848989968cdd2a5ec75ea9d6ee60b2c67ce18",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "artifacts/source-snapshot.json",
+      "bytes": 25820,
+      "sha256": "42119db30d03c5680658f35cb962cdb4ddf498ddbdba127ed8dc51c0b289e448",
+      "unchangedFromBaseline": true
+    }
+  ],
+  "assets": [
+    {
+      "path": "artifacts/ui-refit/01-facet-matrix.png",
+      "bytes": 158896,
+      "sha256": "0e42d3938f07d59ab2cd07c616a96720b10e8fb10e9560f77ea22313ad087160"
+    },
+    {
+      "path": "artifacts/ui-refit/02-original-source.png",
+      "bytes": 157450,
+      "sha256": "03b6554c4d46845e0257dee4188644597e5ddc578ca6d1d75fac3d5fc0fbfe3c"
+    },
+    {
+      "path": "artifacts/ui-refit/03-proposed-link.png",
+      "bytes": 142863,
+      "sha256": "0e737a838096f1a42a8ac1a804906ded2e7b649b04f47bae52e375f462054823"
+    },
+    {
+      "path": "artifacts/ui-refit/04-accepted-receipt.png",
+      "bytes": 126328,
+      "sha256": "fd21e7cbce9cf623595b87950367cec801f2fa78f18e39af8644fc0a31703cab"
+    },
+    {
+      "path": "artifacts/ui-refit/05-stale-review.png",
+      "bytes": 147780,
+      "sha256": "06c2d064d30ef3cf5ddc298eca81cb91f451a89a9f1dfb641ddca173094799bb"
+    },
+    {
+      "path": "artifacts/ui-refit/06-fictional-conflict.png",
+      "bytes": 160894,
+      "sha256": "89fd9541193600316d4344dc7a58c25fa1583d2a72daf42a1406fb141e81516a"
+    },
+    {
+      "path": "artifacts/ui-refit/07-access-revoked.png",
+      "bytes": 102550,
+      "sha256": "dc9669e8ae03ebbc867ab6eef6a981747a49f0bdebb3d127f55c0b6291363740"
+    },
+    {
+      "path": "artifacts/ui-refit/08-invalid-json.png",
+      "bytes": 97588,
+      "sha256": "cabda9e3cc53bd845b997bc3f5b72d855dbb53265788c02b9f582ba63b14b931"
+    },
+    {
+      "path": "artifacts/ui-refit/09-missing-assertions.png",
+      "bytes": 146445,
+      "sha256": "16fa220fc55460822fe1bf49be76c3d1887743d984783f8300be2d63674321a4"
+    },
+    {
+      "path": "artifacts/ui-refit/10-mobile-390.png",
+      "bytes": 259493,
+      "sha256": "71796db30c857a85bcb440ec4da15d9a5e38faf268cf5f9cc2de401167d2c27f"
+    },
+    {
+      "path": "artifacts/ui-refit/review-demo.mp4",
+      "bytes": 1530867,
+      "sha256": "84b772180965ceed5cf2acac1c89f8e8f293b7a3739418f516c516b4182356eb"
+    },
+    {
+      "path": "artifacts/ui-refit/review-demo.webm",
+      "bytes": 1413074,
+      "sha256": "2dece7199f5e5a08ed9961bac9713be0ea0319cfed81114300f0eb650e5a46ec"
+    }
+  ],
+  "video": {
+    "durationSeconds": 11.08,
+    "width": 1440,
+    "height": 1050,
+    "caption": "자동화된 실제 UI 조작 기록. 수치는 가상 fixture이며 서비스 성능 측정이 아닙니다."
+  }
+}

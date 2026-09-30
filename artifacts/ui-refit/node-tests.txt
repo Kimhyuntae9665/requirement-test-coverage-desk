@@ -1,0 +1,164 @@
+
+> requirement-test-coverage-desk@1.0.0 test
+> node --test
+
+TAP version 13
+# Subtest: two reviewers: rev1 acceptance cannot accept a same-ID rev2 replacement; fresh inspection can
+ok 1 - two reviewers: rev1 acceptance cannot accept a same-ID rev2 replacement; fresh inspection can
+  ---
+  duration_ms: 80.908971
+  ...
+# Subtest: acceptance requires every displayed source field and exact proposal generation
+ok 2 - acceptance requires every displayed source field and exact proposal generation
+  ---
+  duration_ms: 77.130405
+  ...
+# Subtest: source changes without re-proposal and revoked source clicks fail closed
+ok 3 - source changes without re-proposal and revoked source clicks fail closed
+  ---
+  duration_ms: 24.211756
+  ...
+# Subtest: held pre-revocation GET cannot restore revoked source details, counts or accepted authority
+ok 4 - held pre-revocation GET cannot restore revoked source details, counts or accepted authority
+  ---
+  duration_ms: 5.929452
+  ...
+# Subtest: late old HTTP error, network rejection and JSON failure cannot replace current state or toast
+ok 5 - late old HTTP error, network rejection and JSON failure cannot replace current state or toast
+  ---
+  duration_ms: 4.124467
+  ...
+# Subtest: older success cannot clear a newer failure or populate stale state
+ok 6 - older success cannot clear a newer failure or populate stale state
+  ---
+  duration_ms: 1.229838
+  ...
+# Subtest: mutations execute in click order and a later GET waits for all queued mutations
+ok 7 - mutations execute in click order and a later GET waits for all queued mutations
+  ---
+  duration_ms: 2.041273
+  ...
+# Subtest: out-of-order repeated GETs keep the latest snapshot and ignore superseded reads
+ok 8 - out-of-order repeated GETs keep the latest snapshot and ignore superseded reads
+  ---
+  duration_ms: 1.485565
+  ...
+# Subtest: stale acceptance displays refreshed sources and requires a separate acceptance action
+ok 9 - stale acceptance displays refreshed sources and requires a separate acceptance action
+  ---
+  duration_ms: 2.025622
+  ...
+# Subtest: frozen original gold exactly matches the explicit-link definition baseline
+ok 10 - frozen original gold exactly matches the explicit-link definition baseline
+  ---
+  duration_ms: 1.912839
+  ...
+# Subtest: fixtures are fresh, deeply frozen, source integrity checked and original gold is unused at runtime
+ok 11 - fixtures are fresh, deeply frozen, source integrity checked and original gold is unused at runtime
+  ---
+  duration_ms: 1.912569
+  ...
+# Subtest: titles, released precondition, configuration values and vague draft establish no coverage
+ok 12 - titles, released precondition, configuration values and vague draft establish no coverage
+  ---
+  duration_ms: 0.574498
+  ...
+# Subtest: partial definitions and complementary accepted union never manufacture absent runs
+ok 13 - partial definitions and complementary accepted union never manufacture absent runs
+  ---
+  duration_ms: 3.177008
+  ...
+# Subtest: a proposed supported link carries no authority before human review
+ok 14 - a proposed supported link carries no authority before human review
+  ---
+  duration_ms: 0.743843
+  ...
+# Subtest: unlisted pairs are unsupported rather than contradictory
+ok 15 - unlisted pairs are unsupported rather than contradictory
+  ---
+  duration_ms: 0.300919
+  ...
+# Subtest: IDs, revision, baseline, exact span context and assertion source are validated
+ok 16 - IDs, revision, baseline, exact span context and assertion source are validated
+  ---
+  duration_ms: 0.717002
+  ...
+# Subtest: changed R1 code invalidates previous review and does not retain old error assertion support
+ok 17 - changed R1 code invalidates previous review and does not retain old error assertion support
+  ---
+  duration_ms: 3.025833
+  ...
+# Subtest: removing T3 assertions loses facets despite unchanged title and cannot preserve cached review authority
+ok 18 - removing T3 assertions loses facets despite unchanged title and cannot preserve cached review authority
+  ---
+  duration_ms: 2.150946
+  ...
+# Subtest: fictional run provenance and actual test execution remain separate; old APP-0 never verifies APP-1
+ok 19 - fictional run provenance and actual test execution remain separate; old APP-0 never verifies APP-1
+  ---
+  duration_ms: 0.419313
+  ...
+# Subtest: exact <= boundary passes 2000 and rejects 2001; strict < boundary rejects 2000
+ok 20 - exact <= boundary passes 2000 and rejects 2001; strict < boundary rejects 2000
+  ---
+  duration_ms: 2.550549
+  ...
+# Subtest: test revision and software baseline mismatch each block current run eligibility
+ok 21 - test revision and software baseline mismatch each block current run eligibility
+  ---
+  duration_ms: 0.497855
+  ...
+# Subtest: configuration or missing/incomplete load measurements cannot count as performance evidence
+ok 22 - configuration or missing/incomplete load measurements cannot count as performance evidence
+  ---
+  duration_ms: 0.389782
+  ...
+# Subtest: access revocation removes source details, count hints, facets and cached authority
+ok 23 - access revocation removes source details, count hints, facets and cached authority
+  ---
+  duration_ms: 2.941391
+  ...
+# Subtest: model timeout, invalid JSON, invalid shape and structurally invalid proposals are explicit states
+ok 24 - model timeout, invalid JSON, invalid shape and structurally invalid proposals are explicit states
+  ---
+  duration_ms: 0.864927
+  ...
+# Subtest: source identity changes cannot preserve accepted review authority or source integrity
+ok 25 - source identity changes cannot preserve accepted review authority or source integrity
+  ---
+  duration_ms: 0.953889
+  ...
+# Subtest: run source identity and test-source provenance are independently bound
+ok 26 - run source identity and test-source provenance are independently bound
+  ---
+  duration_ms: 0.6585
+  ...
+# Subtest: a passing unrelated run never verifies another requirement or a draft
+ok 27 - a passing unrelated run never verifies another requirement or a draft
+  ---
+  duration_ms: 0.721012
+  ...
+# Subtest: HTTP repeated decisions, source staleness, revoked access, failures and origin guard
+ok 28 - HTTP repeated decisions, source staleness, revoked access, failures and origin guard
+  ---
+  duration_ms: 124.648598
+  ...
+# Subtest: archived model outputs retain captured source versions after current definition changes
+ok 29 - archived model outputs retain captured source versions after current definition changes
+  ---
+  duration_ms: 1.929639
+  ...
+# Subtest: request tampering and malformed model entries are recorded as rejected evidence
+ok 30 - request tampering and malformed model entries are recorded as rejected evidence
+  ---
+  duration_ms: 0.205066
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 242.247839

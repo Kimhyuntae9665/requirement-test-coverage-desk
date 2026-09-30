@@ -1,16 +1,58 @@
-# Requirement / Test Coverage Desk · P05
-
 <img src="docs/architecture.png" alt="Sources feed optional Qwen proposals and explicit rules; validated proposals go to a reviewer and facet matrix" width="420">
 
-[Editable SVG](docs/architecture.svg) · [Glyph and media provenance](docs/asset-provenance.md)
+# 요구사항 테스트 검토 · P05
 
-A QA engineer reviews requirement facets against exact test assertions, accepts semantic coverage, and sees missing, stale or conflicting evidence. The native table uses one row per facet and separate columns for definition support, reviewer acceptance and compatible run evidence. Original requirement details and test-source navigation support keyboard focus. A requirement title appearing in a test never establishes coverage. A passing old run never verifies the current application baseline.
+[구조 SVG](docs/architecture.svg) · [미디어 출처](docs/asset-provenance.md)
 
-This is an original **synthetic label-request service** fixture. There is no factory printing, vehicle-safety verification, Codebeamer/ALM integration, autonomous test execution, or certification. The native browser desk uses Node's standard library; twelve definitions need no embedding or vector database.
+요구사항 원문과 테스트 assertion을 비교해 패싯 연결을 명시적으로 수락합니다. 정의·검토 수락·가상 실행은 각각 다른 근거입니다. 합성 서비스 예제이며 실제 서비스 테스트나 인증을 수행하지 않습니다.
 
-![Actual browser stale-review flow](artifacts/media/03-stale-review.png)
+현재 UI는 원문과 결과를 같은 폭의 흰색 패널로 보여줍니다. 패싯 표와 원문 링크, 정확한 구간·revision·SHA256, 실패·오래된 근거·접근 철회 상태를 유지합니다. 검토 영수증은 서버가 필터링한 현재 메모리 작업공간의 이력이며 영구 감사 기록이 아닙니다.
 
-[Watch the actual browser demo (MP4)](artifacts/media/review-demo.mp4) · [WebM](artifacts/media/review-demo.webm) · [Browser checks](artifacts/browser-checks.json)
+![패싯별 정의·수락·실행 근거](artifacts/ui-refit/01-facet-matrix.png)
+
+패싯별 정의·수락·실행 근거.
+
+![키보드로 연 원문과 테스트 근거](artifacts/ui-refit/02-original-source.png)
+
+키보드로 연 원문과 테스트 근거.
+
+![수락 전 연결 제안](artifacts/ui-refit/03-proposed-link.png)
+
+수락 전 연결 제안.
+
+![반복 수락 후 하나의 검토 영수증](artifacts/ui-refit/04-accepted-receipt.png)
+
+반복 수락 후 하나의 검토 영수증.
+
+![원문 변경으로 오래된 수락](artifacts/ui-refit/05-stale-review.png)
+
+원문 변경으로 오래된 수락.
+
+![가상 2001ms 경계 충돌](artifacts/ui-refit/06-fictional-conflict.png)
+
+가상 2001ms 경계 충돌.
+
+![접근 철회 후 T10 근거와 영수증 제거](artifacts/ui-refit/07-access-revoked.png)
+
+접근 철회 후 T10 근거와 영수증 제거.
+
+![잘못된 JSON 주입과 제안 비우기](artifacts/ui-refit/08-invalid-json.png)
+
+잘못된 JSON 주입과 제안 비우기.
+
+![Assertion 제거 후 수락 차단](artifacts/ui-refit/09-missing-assertions.png)
+
+Assertion 제거 후 수락 차단.
+
+![390px 제목과 키보드 스크롤 표](artifacts/ui-refit/10-mobile-390.png)
+
+390px 제목과 키보드 스크롤 표.
+
+[현재 UI 실제 조작 영상 MP4](artifacts/ui-refit/review-demo.mp4) · [WebM](artifacts/ui-refit/review-demo.webm) · [새 브라우저 검증](artifacts/ui-refit/browser-checks.json) · [동시성 검증](artifacts/ui-refit/client-race-fixed.json) · [해시·크기·동결 출처](artifacts/ui-refit/provenance.json)
+
+영상은 자동화된 Chrome UI 조작을 기록합니다. 2000/2001ms는 가상 fixture 수치이며 서비스 성능 측정이 아닙니다. 이번 UI 갱신의 GPU·모델 호출은 **0**입니다. 기존 Qwen 평가 12회와 결과는 변경하지 않았습니다.
+
+기존 [이미지와 영상](artifacts/media)은 이전 UI의 역사적 기록입니다. [기능 목록](feature-inventory.md)을 변경 전 작성했으며, 원래 30개 Node와 6개 Python 검증 및 실제 Chrome 키보드·stale 클릭·두 검토자·철회·반복 수락·390px 검증을 통과했습니다. Chrome 검증은 로컬 실행이며 CI는 CPU 검증입니다.
 
 ## Try the desk
 
@@ -20,7 +62,7 @@ npm start
 # http://127.0.0.1:5055
 ```
 
-Node 18+; no npm install or paid service is required. Choose **Propose explicit links**, inspect the requirement text, test precondition and full assertion spans, then accept a link. **Recorded Qwen proposals** loads actual archived model suggestions without calling a model. Review decisions are held in one in-memory demo workspace; reset restores the frozen original fixture. See the [runbook](docs/runbook.md) for optional evaluation, local browser recording and production limitations.
+Node 18+; no npm install or paid service is required. Choose **명시적 연결 제안**, inspect the requirement text, test precondition and full assertion spans, then accept a link. **기록된 Qwen 제안** loads actual archived model suggestions without calling a model. Review decisions are held in one in-memory demo workspace; reset restores the frozen original fixture. See the [runbook](docs/runbook.md) for optional evaluation, local browser recording and production limitations.
 
 ## Three different kinds of evidence
 
@@ -89,9 +131,9 @@ The archived run snapshot was reconstructed from its pre-inference source commit
 
 ## Validation and review
 
-**21 Node tests and 6 Python transport tests pass.** CPU checks cover the original mapping, partial/union semantics, exact spans, source substitution, revision staleness, unrelated run isolation, timing boundaries, access revocation, malformed archived outputs and replayed source versions. Python tests mock HTTP; they check shared busy/blocked behavior, durable timeout barriers, symlink rejection, retained flock after marker failure, and retention even when artifact writes fail. No GPU call occurs in CI.
+**30 Node tests and 6 Python transport tests pass.** CPU checks cover the original mapping, partial/union semantics, exact spans, source substitution, revision staleness, unrelated run isolation, timing boundaries, access revocation, malformed archived outputs and replayed source versions. Python tests mock HTTP; they check shared busy/blocked behavior, durable timeout barriers, symlink rejection, retained flock after marker failure, and retention even when artifact writes fail. No GPU call occurs in CI.
 
-An [independent GPT-6 Astra review](docs/review.md) found and drove fixes to source identity, unrelated run eligibility, archived source binding, malformed proposal handling and lease retention. The final review confirmed all reported blockers resolved. Actual [browser evidence](artifacts/media) covers repeated acceptance, stale review, failed timing fixture, stale APP-0 execution, access revocation, removed assertions, recorded proposals, and injected failure states. [Published README checks](artifacts/published-checks.json) verify successful live GitHub image loading at 360px, 390px and 1440px (natural 420 × 700, displayed 294px, 324px and 420px respectively). Matrix columns remain scrollable on narrow screens.
+An [independent GPT-6 Astra review](docs/review.md) found and drove fixes to source identity, unrelated run eligibility, archived source binding, malformed proposal handling and lease retention. The final review confirmed all reported blockers resolved. Historical pre-refit [browser evidence](artifacts/media) covers repeated acceptance, stale review, failed timing fixture, stale APP-0 execution, access revocation, removed assertions, recorded proposals, and injected failure states. Historical [published README checks](artifacts/published-checks.json) verified successful live GitHub image loading at 360px, 390px and 1440px (natural 420 × 700, displayed 294px, 324px and 420px respectively). Matrix columns remain scrollable on narrow screens.
 
 ## Enterprise context
 
