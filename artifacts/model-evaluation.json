@@ -1,0 +1,940 @@
+{
+  "fixture": "original frozen synthetic gold",
+  "actualServiceRuns": 0,
+  "developmentCalls": 0,
+  "evaluationAttempts": 12,
+  "limits": {
+    "model": "qwen3:4b",
+    "context": 4096,
+    "output": 512,
+    "timeoutSeconds": 60,
+    "concurrency": 1,
+    "temperature": 0,
+    "seed": 42,
+    "think": false
+  },
+  "expectedFacetLinks": 13,
+  "explicitLinkBaseline": {
+    "truePositive": 13,
+    "falsePositive": 0,
+    "falseNegative": 0
+  },
+  "rawModel": {
+    "truePositive": 13,
+    "falsePositive": 9,
+    "falseNegative": 0
+  },
+  "afterSourceRules": {
+    "truePositive": 8,
+    "falsePositive": 0,
+    "falseNegative": 5
+  },
+  "humanAcceptedModelLinks": 0,
+  "attempts": [
+    {
+      "testId": "T1",
+      "status": "complete",
+      "parseState": "valid-json",
+      "requestMatch": true,
+      "elapsedMs": 3784.41,
+      "evalCount": 119,
+      "promptEvalCount": 630,
+      "doneReason": "stop",
+      "results": [
+        {
+          "proposal": {
+            "requirementId": "R1",
+            "testId": "T1",
+            "facetIds": [
+              "F1",
+              "F2"
+            ],
+            "spans": [
+              {
+                "facetId": "F1",
+                "assertionId": "T1.A1",
+                "start": 0,
+                "end": 48,
+                "text": "Response status equals 201 and a job is created."
+              }
+            ],
+            "requirementSourceId": "synthetic:R1",
+            "testSourceId": "synthetic:T1",
+            "requirementRevision": 1,
+            "testRevision": 1,
+            "requirementHash": "01f83d48b0d528ca96efabbd834831cecff7d8a522533a6cf873a4bed46d6f6e",
+            "testHash": "8794d93afabcb9a8330190bfdae8b5b17145a56919cb6171f04b6ad2658e6148",
+            "requirementBaseline": "REQ-1",
+            "origin": "qwen3:4b"
+          },
+          "validation": {
+            "valid": false,
+            "status": "invalid",
+            "issues": [
+              "Facet has no assertion span."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "testId": "T2",
+      "status": "complete",
+      "parseState": "valid-json",
+      "requestMatch": true,
+      "elapsedMs": 2962.46,
+      "evalCount": 181,
+      "promptEvalCount": 629,
+      "doneReason": "stop",
+      "results": [
+        {
+          "proposal": {
+            "requirementId": "R1",
+            "testId": "T2",
+            "facetIds": [
+              "F1",
+              "F2"
+            ],
+            "spans": [
+              {
+                "facetId": "F1",
+                "assertionId": "T2.A1",
+                "start": 0,
+                "end": 65,
+                "text": "Response status equals 409 and error code equals ORDER_CANCELLED."
+              },
+              {
+                "facetId": "F2",
+                "assertionId": "T2.A1",
+                "start": 0,
+                "end": 65,
+                "text": "Response status equals 409 and error code equals ORDER_CANCELLED."
+              }
+            ],
+            "requirementSourceId": "synthetic:R1",
+            "testSourceId": "synthetic:T2",
+            "requirementRevision": 1,
+            "testRevision": 1,
+            "requirementHash": "01f83d48b0d528ca96efabbd834831cecff7d8a522533a6cf873a4bed46d6f6e",
+            "testHash": "a96e11f90825ce3b09fb1e4a9215dae787735c2a980f03943b9c2c51d793b2cd",
+            "requirementBaseline": "REQ-1",
+            "origin": "qwen3:4b"
+          },
+          "validation": {
+            "valid": true,
+            "status": "unsupported",
+            "issues": [],
+            "proposal": {
+              "requirementId": "R1",
+              "testId": "T2",
+              "facetIds": [
+                "F1",
+                "F2"
+              ],
+              "spans": [
+                {
+                  "facetId": "F1",
+                  "assertionId": "T2.A1",
+                  "start": 0,
+                  "end": 65,
+                  "text": "Response status equals 409 and error code equals ORDER_CANCELLED."
+                },
+                {
+                  "facetId": "F2",
+                  "assertionId": "T2.A1",
+                  "start": 0,
+                  "end": 65,
+                  "text": "Response status equals 409 and error code equals ORDER_CANCELLED."
+                }
+              ],
+              "requirementSourceId": "synthetic:R1",
+              "testSourceId": "synthetic:T2",
+              "requirementRevision": 1,
+              "testRevision": 1,
+              "requirementHash": "01f83d48b0d528ca96efabbd834831cecff7d8a522533a6cf873a4bed46d6f6e",
+              "testHash": "a96e11f90825ce3b09fb1e4a9215dae787735c2a980f03943b9c2c51d793b2cd",
+              "requirementBaseline": "REQ-1",
+              "origin": "qwen3:4b"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testId": "T3",
+      "status": "complete",
+      "parseState": "valid-json",
+      "requestMatch": true,
+      "elapsedMs": 2851.54,
+      "evalCount": 174,
+      "promptEvalCount": 660,
+      "doneReason": "stop",
+      "results": [
+        {
+          "proposal": {
+            "requirementId": "R1",
+            "testId": "T3",
+            "facetIds": [
+              "F1",
+              "F2"
+            ],
+            "spans": [
+              {
+                "facetId": "F1",
+                "assertionId": "T3.A1",
+                "start": 0,
+                "end": 65,
+                "text": "Response status equals 409 and error code equals ORDER_CANCELLED."
+              },
+              {
+                "facetId": "F2",
+                "assertionId": "T3.A2",
+                "start": 0,
+                "end": 40,
+                "text": "After-job-count equals before-job-count."
+              }
+            ],
+            "requirementSourceId": "synthetic:R1",
+            "testSourceId": "synthetic:T3",
+            "requirementRevision": 1,
+            "testRevision": 1,
+            "requirementHash": "01f83d48b0d528ca96efabbd834831cecff7d8a522533a6cf873a4bed46d6f6e",
+            "testHash": "2827f3f240d44480b96f3275ed5b68a46840467fbce71f4d0500008b13afb52b",
+            "requirementBaseline": "REQ-1",
+            "origin": "qwen3:4b"
+          },
+          "validation": {
+            "valid": true,
+            "status": "supported",
+            "issues": [],
+            "proposal": {
+              "requirementId": "R1",
+              "testId": "T3",
+              "facetIds": [
+                "F1",
+                "F2"
+              ],
+              "spans": [
+                {
+                  "facetId": "F1",
+                  "assertionId": "T3.A1",
+                  "start": 0,
+                  "end": 65,
+                  "text": "Response status equals 409 and error code equals ORDER_CANCELLED."
+                },
+                {
+                  "facetId": "F2",
+                  "assertionId": "T3.A2",
+                  "start": 0,
+                  "end": 40,
+                  "text": "After-job-count equals before-job-count."
+                }
+              ],
+              "requirementSourceId": "synthetic:R1",
+              "testSourceId": "synthetic:T3",
+              "requirementRevision": 1,
+              "testRevision": 1,
+              "requirementHash": "01f83d48b0d528ca96efabbd834831cecff7d8a522533a6cf873a4bed46d6f6e",
+              "testHash": "2827f3f240d44480b96f3275ed5b68a46840467fbce71f4d0500008b13afb52b",
+              "requirementBaseline": "REQ-1",
+              "origin": "qwen3:4b"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testId": "T4",
+      "status": "complete",
+      "parseState": "valid-json",
+      "requestMatch": true,
+      "elapsedMs": 2662.86,
+      "evalCount": 167,
+      "promptEvalCount": 626,
+      "doneReason": "stop",
+      "results": [
+        {
+          "proposal": {
+            "requirementId": "R2",
+            "testId": "T4",
+            "facetIds": [
+              "F1",
+              "F2"
+            ],
+            "spans": [
+              {
+                "facetId": "F1",
+                "assertionId": "T4.A1",
+                "start": 0,
+                "end": 52,
+                "text": "Second response receipt equals the original receipt."
+              },
+              {
+                "facetId": "F2",
+                "assertionId": "T4.A1",
+                "start": 0,
+                "end": 52,
+                "text": "Second response receipt equals the original receipt."
+              }
+            ],
+            "requirementSourceId": "synthetic:R2",
+            "testSourceId": "synthetic:T4",
+            "requirementRevision": 1,
+            "testRevision": 1,
+            "requirementHash": "fef1fe065c3026f2ee1ea560a4303c5a6dc26401d6ed3e1a02180580b0b19d88",
+            "testHash": "2529c915f450fffaeb5f5758290292f66d9cee7e456102e947ae6f798617f5ea",
+            "requirementBaseline": "REQ-1",
+            "origin": "qwen3:4b"
+          },
+          "validation": {
+            "valid": true,
+            "status": "unsupported",
+            "issues": [],
+            "proposal": {
+              "requirementId": "R2",
+              "testId": "T4",
+              "facetIds": [
+                "F1",
+                "F2"
+              ],
+              "spans": [
+                {
+                  "facetId": "F1",
+                  "assertionId": "T4.A1",
+                  "start": 0,
+                  "end": 52,
+                  "text": "Second response receipt equals the original receipt."
+                },
+                {
+                  "facetId": "F2",
+                  "assertionId": "T4.A1",
+                  "start": 0,
+                  "end": 52,
+                  "text": "Second response receipt equals the original receipt."
+                }
+              ],
+              "requirementSourceId": "synthetic:R2",
+              "testSourceId": "synthetic:T4",
+              "requirementRevision": 1,
+              "testRevision": 1,
+              "requirementHash": "fef1fe065c3026f2ee1ea560a4303c5a6dc26401d6ed3e1a02180580b0b19d88",
+              "testHash": "2529c915f450fffaeb5f5758290292f66d9cee7e456102e947ae6f798617f5ea",
+              "requirementBaseline": "REQ-1",
+              "origin": "qwen3:4b"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testId": "T5",
+      "status": "complete",
+      "parseState": "valid-json",
+      "requestMatch": true,
+      "elapsedMs": 2876.34,
+      "evalCount": 178,
+      "promptEvalCount": 667,
+      "doneReason": "stop",
+      "results": [
+        {
+          "proposal": {
+            "requirementId": "R3",
+            "testId": "T5",
+            "facetIds": [
+              "F1",
+              "F2"
+            ],
+            "spans": [
+              {
+                "facetId": "F1",
+                "assertionId": "T5.A1",
+                "start": 0,
+                "end": 70,
+                "text": "Response status equals 409 and error code equals IDEMPOTENCY_CONFLICT."
+              },
+              {
+                "facetId": "F2",
+                "assertionId": "T5.A2",
+                "start": 0,
+                "end": 62,
+                "text": "Stored original receipt and original payload remain unchanged."
+              }
+            ],
+            "requirementSourceId": "synthetic:R3",
+            "testSourceId": "synthetic:T5",
+            "requirementRevision": 1,
+            "testRevision": 1,
+            "requirementHash": "032408ef3c6f87f8a46c1a9d4c26663f5717c6dd9d386a50069f2b3313fa53e6",
+            "testHash": "a7564c8cf6f913ec5f084146bc2110ef161c839c79b46b87a9e779ac0bd75187",
+            "requirementBaseline": "REQ-1",
+            "origin": "qwen3:4b"
+          },
+          "validation": {
+            "valid": true,
+            "status": "supported",
+            "issues": [],
+            "proposal": {
+              "requirementId": "R3",
+              "testId": "T5",
+              "facetIds": [
+                "F1",
+                "F2"
+              ],
+              "spans": [
+                {
+                  "facetId": "F1",
+                  "assertionId": "T5.A1",
+                  "start": 0,
+                  "end": 70,
+                  "text": "Response status equals 409 and error code equals IDEMPOTENCY_CONFLICT."
+                },
+                {
+                  "facetId": "F2",
+                  "assertionId": "T5.A2",
+                  "start": 0,
+                  "end": 62,
+                  "text": "Stored original receipt and original payload remain unchanged."
+                }
+              ],
+              "requirementSourceId": "synthetic:R3",
+              "testSourceId": "synthetic:T5",
+              "requirementRevision": 1,
+              "testRevision": 1,
+              "requirementHash": "032408ef3c6f87f8a46c1a9d4c26663f5717c6dd9d386a50069f2b3313fa53e6",
+              "testHash": "a7564c8cf6f913ec5f084146bc2110ef161c839c79b46b87a9e779ac0bd75187",
+              "requirementBaseline": "REQ-1",
+              "origin": "qwen3:4b"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testId": "T6",
+      "status": "complete",
+      "parseState": "valid-json",
+      "requestMatch": true,
+      "elapsedMs": 3529.66,
+      "evalCount": 228,
+      "promptEvalCount": 628,
+      "doneReason": "stop",
+      "results": [
+        {
+          "proposal": {
+            "requirementId": "R4",
+            "testId": "T6",
+            "facetIds": [
+              "F1",
+              "F2",
+              "F3"
+            ],
+            "spans": [
+              {
+                "facetId": "F1",
+                "assertionId": "T6.A1",
+                "start": 0,
+                "end": 41,
+                "text": "Plant-A list contains no plant-B records."
+              },
+              {
+                "facetId": "F2",
+                "assertionId": "T6.A1",
+                "start": 0,
+                "end": 41,
+                "text": "Plant-A list contains no plant-B records."
+              },
+              {
+                "facetId": "F3",
+                "assertionId": "T6.A1",
+                "start": 0,
+                "end": 41,
+                "text": "Plant-A list contains no plant-B records."
+              }
+            ],
+            "requirementSourceId": "synthetic:R4",
+            "testSourceId": "synthetic:T6",
+            "requirementRevision": 1,
+            "testRevision": 1,
+            "requirementHash": "a4f21c98112abdf84917f562c1e966f7309272a181401b4639005d3b264477a5",
+            "testHash": "bcc5fb2d03004cf59af4c2634ac9bf96d5ecbba5e556c8fe96154aa20cb62e4b",
+            "requirementBaseline": "REQ-1",
+            "origin": "qwen3:4b"
+          },
+          "validation": {
+            "valid": true,
+            "status": "unsupported",
+            "issues": [],
+            "proposal": {
+              "requirementId": "R4",
+              "testId": "T6",
+              "facetIds": [
+                "F1",
+                "F2",
+                "F3"
+              ],
+              "spans": [
+                {
+                  "facetId": "F1",
+                  "assertionId": "T6.A1",
+                  "start": 0,
+                  "end": 41,
+                  "text": "Plant-A list contains no plant-B records."
+                },
+                {
+                  "facetId": "F2",
+                  "assertionId": "T6.A1",
+                  "start": 0,
+                  "end": 41,
+                  "text": "Plant-A list contains no plant-B records."
+                },
+                {
+                  "facetId": "F3",
+                  "assertionId": "T6.A1",
+                  "start": 0,
+                  "end": 41,
+                  "text": "Plant-A list contains no plant-B records."
+                }
+              ],
+              "requirementSourceId": "synthetic:R4",
+              "testSourceId": "synthetic:T6",
+              "requirementRevision": 1,
+              "testRevision": 1,
+              "requirementHash": "a4f21c98112abdf84917f562c1e966f7309272a181401b4639005d3b264477a5",
+              "testHash": "bcc5fb2d03004cf59af4c2634ac9bf96d5ecbba5e556c8fe96154aa20cb62e4b",
+              "requirementBaseline": "REQ-1",
+              "origin": "qwen3:4b"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testId": "T7",
+      "status": "complete",
+      "parseState": "valid-json",
+      "requestMatch": true,
+      "elapsedMs": 1973.77,
+      "evalCount": 112,
+      "promptEvalCount": 632,
+      "doneReason": "stop",
+      "results": [
+        {
+          "proposal": {
+            "requirementId": "R5",
+            "testId": "T7",
+            "facetIds": [
+              "F1"
+            ],
+            "spans": [
+              {
+                "facetId": "F1",
+                "assertionId": "T7.A1",
+                "start": 0,
+                "end": 34,
+                "text": "Configured timeout_ms equals 2000."
+              }
+            ],
+            "requirementSourceId": "synthetic:R5",
+            "testSourceId": "synthetic:T7",
+            "requirementRevision": 1,
+            "testRevision": 1,
+            "requirementHash": "048498cd41e3db938c5e50719b99a473bb90c0ff6f3e3076bd6909a8e4fb578b",
+            "testHash": "8ad3051dcc15a4fdff8c731e1c65c588ab64e09b01eedda717e8c92e50981c58",
+            "requirementBaseline": "REQ-1",
+            "origin": "qwen3:4b"
+          },
+          "validation": {
+            "valid": true,
+            "status": "unsupported",
+            "issues": [],
+            "proposal": {
+              "requirementId": "R5",
+              "testId": "T7",
+              "facetIds": [
+                "F1"
+              ],
+              "spans": [
+                {
+                  "facetId": "F1",
+                  "assertionId": "T7.A1",
+                  "start": 0,
+                  "end": 34,
+                  "text": "Configured timeout_ms equals 2000."
+                }
+              ],
+              "requirementSourceId": "synthetic:R5",
+              "testSourceId": "synthetic:T7",
+              "requirementRevision": 1,
+              "testRevision": 1,
+              "requirementHash": "048498cd41e3db938c5e50719b99a473bb90c0ff6f3e3076bd6909a8e4fb578b",
+              "testHash": "8ad3051dcc15a4fdff8c731e1c65c588ab64e09b01eedda717e8c92e50981c58",
+              "requirementBaseline": "REQ-1",
+              "origin": "qwen3:4b"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testId": "T8",
+      "status": "complete",
+      "parseState": "valid-json",
+      "requestMatch": true,
+      "elapsedMs": 2121.81,
+      "evalCount": 125,
+      "promptEvalCount": 647,
+      "doneReason": "stop",
+      "results": [
+        {
+          "proposal": {
+            "requirementId": "R5",
+            "testId": "T8",
+            "facetIds": [
+              "F1"
+            ],
+            "spans": [
+              {
+                "facetId": "F1",
+                "assertionId": "T8.A1",
+                "start": 0,
+                "end": 109,
+                "text": "With five clients and forty successes each, all measured local mock acknowledgement durations are <= 2000 ms."
+              }
+            ],
+            "requirementSourceId": "synthetic:R5",
+            "testSourceId": "synthetic:T8",
+            "requirementRevision": 1,
+            "testRevision": 1,
+            "requirementHash": "048498cd41e3db938c5e50719b99a473bb90c0ff6f3e3076bd6909a8e4fb578b",
+            "testHash": "cacf4d2db5f1795ecc44d090897a8611b6135c09f5794e89dfe4405eb1f0952d",
+            "requirementBaseline": "REQ-1",
+            "origin": "qwen3:4b"
+          },
+          "validation": {
+            "valid": true,
+            "status": "supported",
+            "issues": [],
+            "proposal": {
+              "requirementId": "R5",
+              "testId": "T8",
+              "facetIds": [
+                "F1"
+              ],
+              "spans": [
+                {
+                  "facetId": "F1",
+                  "assertionId": "T8.A1",
+                  "start": 0,
+                  "end": 109,
+                  "text": "With five clients and forty successes each, all measured local mock acknowledgement durations are <= 2000 ms."
+                }
+              ],
+              "requirementSourceId": "synthetic:R5",
+              "testSourceId": "synthetic:T8",
+              "requirementRevision": 1,
+              "testRevision": 1,
+              "requirementHash": "048498cd41e3db938c5e50719b99a473bb90c0ff6f3e3076bd6909a8e4fb578b",
+              "testHash": "cacf4d2db5f1795ecc44d090897a8611b6135c09f5794e89dfe4405eb1f0952d",
+              "requirementBaseline": "REQ-1",
+              "origin": "qwen3:4b"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testId": "T9",
+      "status": "complete",
+      "parseState": "valid-json",
+      "requestMatch": true,
+      "elapsedMs": 2732.97,
+      "evalCount": 171,
+      "promptEvalCount": 661,
+      "doneReason": "stop",
+      "results": [
+        {
+          "proposal": {
+            "requirementId": "R2",
+            "testId": "T9",
+            "facetIds": [
+              "F1",
+              "F2"
+            ],
+            "spans": [
+              {
+                "facetId": "F1",
+                "assertionId": "T9.A1",
+                "start": 0,
+                "end": 52,
+                "text": "Second response receipt equals the original receipt."
+              },
+              {
+                "facetId": "F2",
+                "assertionId": "T9.A2",
+                "start": 0,
+                "end": 51,
+                "text": "Exactly one total job matches this idempotency key."
+              }
+            ],
+            "requirementSourceId": "synthetic:R2",
+            "testSourceId": "synthetic:T9",
+            "requirementRevision": 1,
+            "testRevision": 1,
+            "requirementHash": "fef1fe065c3026f2ee1ea560a4303c5a6dc26401d6ed3e1a02180580b0b19d88",
+            "testHash": "915fb1bf914a582f8e672041e7a7be50a1c8d09363757d18bec3b503313db2ab",
+            "requirementBaseline": "REQ-1",
+            "origin": "qwen3:4b"
+          },
+          "validation": {
+            "valid": true,
+            "status": "supported",
+            "issues": [],
+            "proposal": {
+              "requirementId": "R2",
+              "testId": "T9",
+              "facetIds": [
+                "F1",
+                "F2"
+              ],
+              "spans": [
+                {
+                  "facetId": "F1",
+                  "assertionId": "T9.A1",
+                  "start": 0,
+                  "end": 52,
+                  "text": "Second response receipt equals the original receipt."
+                },
+                {
+                  "facetId": "F2",
+                  "assertionId": "T9.A2",
+                  "start": 0,
+                  "end": 51,
+                  "text": "Exactly one total job matches this idempotency key."
+                }
+              ],
+              "requirementSourceId": "synthetic:R2",
+              "testSourceId": "synthetic:T9",
+              "requirementRevision": 1,
+              "testRevision": 1,
+              "requirementHash": "fef1fe065c3026f2ee1ea560a4303c5a6dc26401d6ed3e1a02180580b0b19d88",
+              "testHash": "915fb1bf914a582f8e672041e7a7be50a1c8d09363757d18bec3b503313db2ab",
+              "requirementBaseline": "REQ-1",
+              "origin": "qwen3:4b"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testId": "T10",
+      "status": "complete",
+      "parseState": "valid-json",
+      "requestMatch": true,
+      "elapsedMs": 3807.45,
+      "evalCount": 249,
+      "promptEvalCount": 677,
+      "doneReason": "stop",
+      "results": [
+        {
+          "proposal": {
+            "requirementId": "R4",
+            "testId": "T10",
+            "facetIds": [
+              "F1",
+              "F2",
+              "F3"
+            ],
+            "spans": [
+              {
+                "facetId": "F1",
+                "assertionId": "T10.A1",
+                "start": 0,
+                "end": 59,
+                "text": "Known plant-B detail returns 403 with no restricted fields."
+              },
+              {
+                "facetId": "F2",
+                "assertionId": "T10.A1",
+                "start": 0,
+                "end": 59,
+                "text": "Known plant-B detail returns 403 with no restricted fields."
+              },
+              {
+                "facetId": "F3",
+                "assertionId": "T10.A2",
+                "start": 0,
+                "end": 68,
+                "text": "Known plant-B source/metadata returns 403 with no restricted fields."
+              }
+            ],
+            "requirementSourceId": "synthetic:R4",
+            "testSourceId": "synthetic:T10",
+            "requirementRevision": 1,
+            "testRevision": 1,
+            "requirementHash": "a4f21c98112abdf84917f562c1e966f7309272a181401b4639005d3b264477a5",
+            "testHash": "3bb39f447511dd04a178778010312f5f7000a74fa7c975b59b1e0300ea8619c5",
+            "requirementBaseline": "REQ-1",
+            "origin": "qwen3:4b"
+          },
+          "validation": {
+            "valid": true,
+            "status": "unsupported",
+            "issues": [],
+            "proposal": {
+              "requirementId": "R4",
+              "testId": "T10",
+              "facetIds": [
+                "F1",
+                "F2",
+                "F3"
+              ],
+              "spans": [
+                {
+                  "facetId": "F1",
+                  "assertionId": "T10.A1",
+                  "start": 0,
+                  "end": 59,
+                  "text": "Known plant-B detail returns 403 with no restricted fields."
+                },
+                {
+                  "facetId": "F2",
+                  "assertionId": "T10.A1",
+                  "start": 0,
+                  "end": 59,
+                  "text": "Known plant-B detail returns 403 with no restricted fields."
+                },
+                {
+                  "facetId": "F3",
+                  "assertionId": "T10.A2",
+                  "start": 0,
+                  "end": 68,
+                  "text": "Known plant-B source/metadata returns 403 with no restricted fields."
+                }
+              ],
+              "requirementSourceId": "synthetic:R4",
+              "testSourceId": "synthetic:T10",
+              "requirementRevision": 1,
+              "testRevision": 1,
+              "requirementHash": "a4f21c98112abdf84917f562c1e966f7309272a181401b4639005d3b264477a5",
+              "testHash": "3bb39f447511dd04a178778010312f5f7000a74fa7c975b59b1e0300ea8619c5",
+              "requirementBaseline": "REQ-1",
+              "origin": "qwen3:4b"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testId": "T11",
+      "status": "complete",
+      "parseState": "valid-json",
+      "requestMatch": true,
+      "elapsedMs": 2120.12,
+      "evalCount": 127,
+      "promptEvalCount": 650,
+      "doneReason": "stop",
+      "results": [
+        {
+          "proposal": {
+            "requirementId": "R5",
+            "testId": "T11",
+            "facetIds": [
+              "F1"
+            ],
+            "spans": [
+              {
+                "facetId": "F1",
+                "assertionId": "T11.A1",
+                "start": 0,
+                "end": 109,
+                "text": "With five clients and forty successes each, all measured local mock acknowledgement durations are <= 2000 ms."
+              }
+            ],
+            "requirementSourceId": "synthetic:R5",
+            "testSourceId": "synthetic:T11",
+            "requirementRevision": 1,
+            "testRevision": 1,
+            "requirementHash": "048498cd41e3db938c5e50719b99a473bb90c0ff6f3e3076bd6909a8e4fb578b",
+            "testHash": "2fe9a97c7e6fe318a1f63e1d32d7aed7289fef74f932a3a80eb48f129f57285e",
+            "requirementBaseline": "REQ-1",
+            "origin": "qwen3:4b"
+          },
+          "validation": {
+            "valid": true,
+            "status": "supported",
+            "issues": [],
+            "proposal": {
+              "requirementId": "R5",
+              "testId": "T11",
+              "facetIds": [
+                "F1"
+              ],
+              "spans": [
+                {
+                  "facetId": "F1",
+                  "assertionId": "T11.A1",
+                  "start": 0,
+                  "end": 109,
+                  "text": "With five clients and forty successes each, all measured local mock acknowledgement durations are <= 2000 ms."
+                }
+              ],
+              "requirementSourceId": "synthetic:R5",
+              "testSourceId": "synthetic:T11",
+              "requirementRevision": 1,
+              "testRevision": 1,
+              "requirementHash": "048498cd41e3db938c5e50719b99a473bb90c0ff6f3e3076bd6909a8e4fb578b",
+              "testHash": "2fe9a97c7e6fe318a1f63e1d32d7aed7289fef74f932a3a80eb48f129f57285e",
+              "requirementBaseline": "REQ-1",
+              "origin": "qwen3:4b"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testId": "T12",
+      "status": "complete",
+      "parseState": "valid-json",
+      "requestMatch": true,
+      "elapsedMs": 1959.12,
+      "evalCount": 115,
+      "promptEvalCount": 629,
+      "doneReason": "stop",
+      "results": [
+        {
+          "proposal": {
+            "requirementId": "R6",
+            "testId": "T12",
+            "facetIds": [
+              "F1"
+            ],
+            "spans": [
+              {
+                "facetId": "F1",
+                "assertionId": "T12.A1",
+                "start": 0,
+                "end": 60,
+                "text": "The fast and easy screen uses the expected title and colour."
+              }
+            ],
+            "requirementSourceId": "synthetic:R6",
+            "testSourceId": "synthetic:T12",
+            "requirementRevision": 1,
+            "testRevision": 1,
+            "requirementHash": "c708bfb070c8c2deadf8dfa40b78b01d4e631f6c146631fd16665544121dd6eb",
+            "testHash": "2ebc66e377fce776e4ae3c7a3f7db58298ce51e6834802aa68b51b33fc168761",
+            "requirementBaseline": "REQ-1",
+            "origin": "qwen3:4b"
+          },
+          "validation": {
+            "valid": false,
+            "status": "invalid",
+            "issues": [
+              "Unknown requirement facet."
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

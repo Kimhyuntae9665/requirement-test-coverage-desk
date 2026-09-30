@@ -1,0 +1,918 @@
+{
+  "provenance": "reconstructed-from-pre-inference-commit-and-verified-against-recorded-requests",
+  "sourceCommit": "4079d0a9a26b838b60345093bf680587fe155ebf",
+  "modelInputDigest": "9e9c2c039b1cd687e734a78b615848989968cdd2a5ec75ea9d6ee60b2c67ce18",
+  "modelInput": {
+    "requirements": [
+      {
+        "id": "R1",
+        "status": "approved",
+        "text": "A cancelled order returns 409 / ORDER_CANCELLED and creates no new print job.",
+        "facets": [
+          {
+            "id": "F1",
+            "text": "409 with ORDER_CANCELLED"
+          },
+          {
+            "id": "F2",
+            "text": "No new print job"
+          }
+        ]
+      },
+      {
+        "id": "R2",
+        "status": "approved",
+        "text": "The same payload and key return the original receipt and exactly one total matching job.",
+        "facets": [
+          {
+            "id": "F1",
+            "text": "Original receipt returned"
+          },
+          {
+            "id": "F2",
+            "text": "Exactly one total matching job"
+          }
+        ]
+      },
+      {
+        "id": "R3",
+        "status": "approved",
+        "text": "A changed payload with the same key returns 409 / IDEMPOTENCY_CONFLICT and preserves the original receipt and payload.",
+        "facets": [
+          {
+            "id": "F1",
+            "text": "409 with IDEMPOTENCY_CONFLICT"
+          },
+          {
+            "id": "F2",
+            "text": "Original receipt and payload unchanged"
+          }
+        ]
+      },
+      {
+        "id": "R4",
+        "status": "approved",
+        "text": "A plant-A operator cannot obtain plant-B data through list, detail, or source/metadata.",
+        "facets": [
+          {
+            "id": "F1",
+            "text": "List excludes plant-B"
+          },
+          {
+            "id": "F2",
+            "text": "Detail denied without restricted fields"
+          },
+          {
+            "id": "F3",
+            "text": "Source/metadata denied without restricted fields"
+          }
+        ]
+      },
+      {
+        "id": "R5",
+        "status": "approved",
+        "text": "Under declared local mock load: five clients, forty successful requests each, every acknowledgement duration <= 2000 ms.",
+        "facets": [
+          {
+            "id": "F1",
+            "text": "Declared load and measured acknowledgement duration"
+          }
+        ]
+      },
+      {
+        "id": "R6",
+        "status": "draft",
+        "text": "The screen should be fast and easy.",
+        "facets": []
+      }
+    ],
+    "tests": [
+      {
+        "id": "T1",
+        "title": "R1 cancelled order handling",
+        "preconditions": [
+          {
+            "id": "T1.P1",
+            "text": "Order is released before requesting a label."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T1.A1",
+            "text": "Response status equals 201 and a job is created.",
+            "length": 48
+          }
+        ]
+      },
+      {
+        "id": "T2",
+        "title": "Cancelled response",
+        "preconditions": [
+          {
+            "id": "T2.P1",
+            "text": "Order is cancelled before requesting a label."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T2.A1",
+            "text": "Response status equals 409 and error code equals ORDER_CANCELLED.",
+            "length": 65
+          }
+        ]
+      },
+      {
+        "id": "T3",
+        "title": "Cancelled response and job count",
+        "preconditions": [
+          {
+            "id": "T3.P1",
+            "text": "Order is cancelled before requesting a label."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T3.A1",
+            "text": "Response status equals 409 and error code equals ORDER_CANCELLED.",
+            "length": 65
+          },
+          {
+            "id": "T3.A2",
+            "text": "After-job-count equals before-job-count.",
+            "length": 40
+          }
+        ]
+      },
+      {
+        "id": "T4",
+        "title": "Retry receipt",
+        "preconditions": [
+          {
+            "id": "T4.P1",
+            "text": "Submit the identical payload and idempotency key twice."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T4.A1",
+            "text": "Second response receipt equals the original receipt.",
+            "length": 52
+          }
+        ]
+      },
+      {
+        "id": "T5",
+        "title": "Conflict preserves original",
+        "preconditions": [
+          {
+            "id": "T5.P1",
+            "text": "Submit a different payload with the original idempotency key."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T5.A1",
+            "text": "Response status equals 409 and error code equals IDEMPOTENCY_CONFLICT.",
+            "length": 70
+          },
+          {
+            "id": "T5.A2",
+            "text": "Stored original receipt and original payload remain unchanged.",
+            "length": 62
+          }
+        ]
+      },
+      {
+        "id": "T6",
+        "title": "List plant isolation",
+        "preconditions": [
+          {
+            "id": "T6.P1",
+            "text": "Authenticate as a plant-A operator; plant-B resources exist."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T6.A1",
+            "text": "Plant-A list contains no plant-B records.",
+            "length": 41
+          }
+        ]
+      },
+      {
+        "id": "T7",
+        "title": "Configured timeout",
+        "preconditions": [
+          {
+            "id": "T7.P1",
+            "text": "Local mock service; five concurrent clients, forty successful requests per client."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T7.A1",
+            "text": "Configured timeout_ms equals 2000.",
+            "length": 34
+          }
+        ]
+      },
+      {
+        "id": "T8",
+        "title": "Measured local mock acknowledgements",
+        "preconditions": [
+          {
+            "id": "T8.P1",
+            "text": "Local mock service; five concurrent clients, forty successful requests per client."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T8.A1",
+            "text": "With five clients and forty successes each, all measured local mock acknowledgement durations are <= 2000 ms.",
+            "length": 109
+          }
+        ]
+      },
+      {
+        "id": "T9",
+        "title": "Retry receipt and single job",
+        "preconditions": [
+          {
+            "id": "T9.P1",
+            "text": "Submit the identical payload and idempotency key twice."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T9.A1",
+            "text": "Second response receipt equals the original receipt.",
+            "length": 52
+          },
+          {
+            "id": "T9.A2",
+            "text": "Exactly one total job matches this idempotency key.",
+            "length": 51
+          }
+        ]
+      },
+      {
+        "id": "T10",
+        "title": "Known cross-plant detail and source",
+        "preconditions": [
+          {
+            "id": "T10.P1",
+            "text": "Authenticate as a plant-A operator; plant-B resources exist."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T10.A1",
+            "text": "Known plant-B detail returns 403 with no restricted fields.",
+            "length": 59
+          },
+          {
+            "id": "T10.A2",
+            "text": "Known plant-B source/metadata returns 403 with no restricted fields.",
+            "length": 68
+          }
+        ]
+      },
+      {
+        "id": "T11",
+        "title": "Current local mock acknowledgement fixture",
+        "preconditions": [
+          {
+            "id": "T11.P1",
+            "text": "Local mock service; five concurrent clients, forty successful requests per client."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T11.A1",
+            "text": "With five clients and forty successes each, all measured local mock acknowledgement durations are <= 2000 ms.",
+            "length": 109
+          }
+        ]
+      },
+      {
+        "id": "T12",
+        "title": "Fast screen colour check",
+        "preconditions": [
+          {
+            "id": "T12.P1",
+            "text": "Open the label-request screen."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T12.A1",
+            "text": "The fast and easy screen uses the expected title and colour.",
+            "length": 60
+          }
+        ]
+      }
+    ]
+  },
+  "fixture": {
+    "baseline": "APP-1",
+    "requirementBaseline": "REQ-1",
+    "requirements": [
+      {
+        "id": "R1",
+        "revision": 1,
+        "status": "approved",
+        "title": "Cancelled orders",
+        "text": "A cancelled order returns 409 / ORDER_CANCELLED and creates no new print job.",
+        "facets": [
+          {
+            "id": "F1",
+            "text": "409 with ORDER_CANCELLED"
+          },
+          {
+            "id": "F2",
+            "text": "No new print job"
+          }
+        ],
+        "errorCode": "ORDER_CANCELLED",
+        "source": {
+          "id": "synthetic:R1",
+          "hash": "01f83d48b0d528ca96efabbd834831cecff7d8a522533a6cf873a4bed46d6f6e"
+        }
+      },
+      {
+        "id": "R2",
+        "revision": 1,
+        "status": "approved",
+        "title": "Identical retry",
+        "text": "The same payload and key return the original receipt and exactly one total matching job.",
+        "facets": [
+          {
+            "id": "F1",
+            "text": "Original receipt returned"
+          },
+          {
+            "id": "F2",
+            "text": "Exactly one total matching job"
+          }
+        ],
+        "source": {
+          "id": "synthetic:R2",
+          "hash": "fef1fe065c3026f2ee1ea560a4303c5a6dc26401d6ed3e1a02180580b0b19d88"
+        }
+      },
+      {
+        "id": "R3",
+        "revision": 1,
+        "status": "approved",
+        "title": "Changed payload",
+        "text": "A changed payload with the same key returns 409 / IDEMPOTENCY_CONFLICT and preserves the original receipt and payload.",
+        "facets": [
+          {
+            "id": "F1",
+            "text": "409 with IDEMPOTENCY_CONFLICT"
+          },
+          {
+            "id": "F2",
+            "text": "Original receipt and payload unchanged"
+          }
+        ],
+        "errorCode": "IDEMPOTENCY_CONFLICT",
+        "source": {
+          "id": "synthetic:R3",
+          "hash": "032408ef3c6f87f8a46c1a9d4c26663f5717c6dd9d386a50069f2b3313fa53e6"
+        }
+      },
+      {
+        "id": "R4",
+        "revision": 1,
+        "status": "approved",
+        "title": "Plant isolation",
+        "text": "A plant-A operator cannot obtain plant-B data through list, detail, or source/metadata.",
+        "facets": [
+          {
+            "id": "F1",
+            "text": "List excludes plant-B"
+          },
+          {
+            "id": "F2",
+            "text": "Detail denied without restricted fields"
+          },
+          {
+            "id": "F3",
+            "text": "Source/metadata denied without restricted fields"
+          }
+        ],
+        "source": {
+          "id": "synthetic:R4",
+          "hash": "a4f21c98112abdf84917f562c1e966f7309272a181401b4639005d3b264477a5"
+        }
+      },
+      {
+        "id": "R5",
+        "revision": 1,
+        "status": "approved",
+        "title": "Local mock acknowledgements",
+        "text": "Under declared local mock load: five clients, forty successful requests each, every acknowledgement duration <= 2000 ms.",
+        "facets": [
+          {
+            "id": "F1",
+            "text": "Declared load and measured acknowledgement duration"
+          }
+        ],
+        "performance": {
+          "clients": 5,
+          "requestsPerClient": 40,
+          "operator": "<=",
+          "maxMs": 2000,
+          "scope": "local-mock"
+        },
+        "source": {
+          "id": "synthetic:R5",
+          "hash": "048498cd41e3db938c5e50719b99a473bb90c0ff6f3e3076bd6909a8e4fb578b"
+        }
+      },
+      {
+        "id": "R6",
+        "revision": 1,
+        "status": "draft",
+        "title": "Fast and easy screen",
+        "text": "The screen should be fast and easy.",
+        "facets": [],
+        "clarification": "Define a measurable acceptance threshold before verification.",
+        "source": {
+          "id": "synthetic:R6",
+          "hash": "c708bfb070c8c2deadf8dfa40b78b01d4e631f6c146631fd16665544121dd6eb"
+        }
+      }
+    ],
+    "tests": [
+      {
+        "id": "T1",
+        "revision": 1,
+        "accessible": true,
+        "title": "R1 cancelled order handling",
+        "preconditions": [
+          {
+            "id": "T1.P1",
+            "kind": "released",
+            "text": "Order is released before requesting a label."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T1.A1",
+            "text": "Response status equals 201 and a job is created.",
+            "kind": "created",
+            "anchors": [],
+            "status": 201
+          }
+        ],
+        "source": {
+          "id": "synthetic:T1",
+          "hash": "8794d93afabcb9a8330190bfdae8b5b17145a56919cb6171f04b6ad2658e6148"
+        }
+      },
+      {
+        "id": "T2",
+        "revision": 1,
+        "accessible": true,
+        "title": "Cancelled response",
+        "preconditions": [
+          {
+            "id": "T2.P1",
+            "kind": "cancelled",
+            "text": "Order is cancelled before requesting a label."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T2.A1",
+            "text": "Response status equals 409 and error code equals ORDER_CANCELLED.",
+            "kind": "error",
+            "anchors": [
+              {
+                "requirementId": "R1",
+                "facetId": "F1"
+              }
+            ],
+            "status": 409,
+            "code": "ORDER_CANCELLED"
+          }
+        ],
+        "source": {
+          "id": "synthetic:T2",
+          "hash": "a96e11f90825ce3b09fb1e4a9215dae787735c2a980f03943b9c2c51d793b2cd"
+        }
+      },
+      {
+        "id": "T3",
+        "revision": 1,
+        "accessible": true,
+        "title": "Cancelled response and job count",
+        "preconditions": [
+          {
+            "id": "T3.P1",
+            "kind": "cancelled",
+            "text": "Order is cancelled before requesting a label."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T3.A1",
+            "text": "Response status equals 409 and error code equals ORDER_CANCELLED.",
+            "kind": "error",
+            "anchors": [
+              {
+                "requirementId": "R1",
+                "facetId": "F1"
+              }
+            ],
+            "status": 409,
+            "code": "ORDER_CANCELLED"
+          },
+          {
+            "id": "T3.A2",
+            "text": "After-job-count equals before-job-count.",
+            "kind": "no-new-job",
+            "anchors": [
+              {
+                "requirementId": "R1",
+                "facetId": "F2"
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "synthetic:T3",
+          "hash": "2827f3f240d44480b96f3275ed5b68a46840467fbce71f4d0500008b13afb52b"
+        }
+      },
+      {
+        "id": "T4",
+        "revision": 1,
+        "accessible": true,
+        "title": "Retry receipt",
+        "preconditions": [
+          {
+            "id": "T4.P1",
+            "kind": "retry",
+            "text": "Submit the identical payload and idempotency key twice."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T4.A1",
+            "text": "Second response receipt equals the original receipt.",
+            "kind": "original-receipt",
+            "anchors": [
+              {
+                "requirementId": "R2",
+                "facetId": "F1"
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "synthetic:T4",
+          "hash": "2529c915f450fffaeb5f5758290292f66d9cee7e456102e947ae6f798617f5ea"
+        }
+      },
+      {
+        "id": "T5",
+        "revision": 1,
+        "accessible": true,
+        "title": "Conflict preserves original",
+        "preconditions": [
+          {
+            "id": "T5.P1",
+            "kind": "changed",
+            "text": "Submit a different payload with the original idempotency key."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T5.A1",
+            "text": "Response status equals 409 and error code equals IDEMPOTENCY_CONFLICT.",
+            "kind": "error",
+            "anchors": [
+              {
+                "requirementId": "R3",
+                "facetId": "F1"
+              }
+            ],
+            "status": 409,
+            "code": "IDEMPOTENCY_CONFLICT"
+          },
+          {
+            "id": "T5.A2",
+            "text": "Stored original receipt and original payload remain unchanged.",
+            "kind": "original-preserved",
+            "anchors": [
+              {
+                "requirementId": "R3",
+                "facetId": "F2"
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "synthetic:T5",
+          "hash": "a7564c8cf6f913ec5f084146bc2110ef161c839c79b46b87a9e779ac0bd75187"
+        }
+      },
+      {
+        "id": "T6",
+        "revision": 1,
+        "accessible": true,
+        "title": "List plant isolation",
+        "preconditions": [
+          {
+            "id": "T6.P1",
+            "kind": "plant",
+            "text": "Authenticate as a plant-A operator; plant-B resources exist."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T6.A1",
+            "text": "Plant-A list contains no plant-B records.",
+            "kind": "list-isolation",
+            "anchors": [
+              {
+                "requirementId": "R4",
+                "facetId": "F1"
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "synthetic:T6",
+          "hash": "bcc5fb2d03004cf59af4c2634ac9bf96d5ecbba5e556c8fe96154aa20cb62e4b"
+        }
+      },
+      {
+        "id": "T7",
+        "revision": 1,
+        "accessible": true,
+        "title": "Configured timeout",
+        "preconditions": [
+          {
+            "id": "T7.P1",
+            "kind": "load",
+            "text": "Local mock service; five concurrent clients, forty successful requests per client."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T7.A1",
+            "text": "Configured timeout_ms equals 2000.",
+            "kind": "configuration",
+            "anchors": [],
+            "timeoutMs": 2000
+          }
+        ],
+        "source": {
+          "id": "synthetic:T7",
+          "hash": "8ad3051dcc15a4fdff8c731e1c65c588ab64e09b01eedda717e8c92e50981c58"
+        }
+      },
+      {
+        "id": "T8",
+        "revision": 1,
+        "accessible": true,
+        "title": "Measured local mock acknowledgements",
+        "preconditions": [
+          {
+            "id": "T8.P1",
+            "kind": "load",
+            "text": "Local mock service; five concurrent clients, forty successful requests per client."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T8.A1",
+            "text": "With five clients and forty successes each, all measured local mock acknowledgement durations are <= 2000 ms.",
+            "kind": "performance",
+            "anchors": [
+              {
+                "requirementId": "R5",
+                "facetId": "F1"
+              }
+            ],
+            "clients": 5,
+            "requestsPerClient": 40,
+            "operator": "<=",
+            "maxMs": 2000,
+            "scope": "local-mock"
+          }
+        ],
+        "source": {
+          "id": "synthetic:T8",
+          "hash": "cacf4d2db5f1795ecc44d090897a8611b6135c09f5794e89dfe4405eb1f0952d"
+        }
+      },
+      {
+        "id": "T9",
+        "revision": 1,
+        "accessible": true,
+        "title": "Retry receipt and single job",
+        "preconditions": [
+          {
+            "id": "T9.P1",
+            "kind": "retry",
+            "text": "Submit the identical payload and idempotency key twice."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T9.A1",
+            "text": "Second response receipt equals the original receipt.",
+            "kind": "original-receipt",
+            "anchors": [
+              {
+                "requirementId": "R2",
+                "facetId": "F1"
+              }
+            ]
+          },
+          {
+            "id": "T9.A2",
+            "text": "Exactly one total job matches this idempotency key.",
+            "kind": "one-job",
+            "anchors": [
+              {
+                "requirementId": "R2",
+                "facetId": "F2"
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "synthetic:T9",
+          "hash": "915fb1bf914a582f8e672041e7a7be50a1c8d09363757d18bec3b503313db2ab"
+        }
+      },
+      {
+        "id": "T10",
+        "revision": 1,
+        "accessible": true,
+        "title": "Known cross-plant detail and source",
+        "preconditions": [
+          {
+            "id": "T10.P1",
+            "kind": "plant",
+            "text": "Authenticate as a plant-A operator; plant-B resources exist."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T10.A1",
+            "text": "Known plant-B detail returns 403 with no restricted fields.",
+            "kind": "detail-isolation",
+            "anchors": [
+              {
+                "requirementId": "R4",
+                "facetId": "F2"
+              }
+            ],
+            "status": 403,
+            "noRestrictedFields": true
+          },
+          {
+            "id": "T10.A2",
+            "text": "Known plant-B source/metadata returns 403 with no restricted fields.",
+            "kind": "source-isolation",
+            "anchors": [
+              {
+                "requirementId": "R4",
+                "facetId": "F3"
+              }
+            ],
+            "status": 403,
+            "noRestrictedFields": true
+          }
+        ],
+        "source": {
+          "id": "synthetic:T10",
+          "hash": "3bb39f447511dd04a178778010312f5f7000a74fa7c975b59b1e0300ea8619c5"
+        }
+      },
+      {
+        "id": "T11",
+        "revision": 1,
+        "accessible": true,
+        "title": "Current local mock acknowledgement fixture",
+        "preconditions": [
+          {
+            "id": "T11.P1",
+            "kind": "load",
+            "text": "Local mock service; five concurrent clients, forty successful requests per client."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T11.A1",
+            "text": "With five clients and forty successes each, all measured local mock acknowledgement durations are <= 2000 ms.",
+            "kind": "performance",
+            "anchors": [
+              {
+                "requirementId": "R5",
+                "facetId": "F1"
+              }
+            ],
+            "clients": 5,
+            "requestsPerClient": 40,
+            "operator": "<=",
+            "maxMs": 2000,
+            "scope": "local-mock"
+          }
+        ],
+        "source": {
+          "id": "synthetic:T11",
+          "hash": "2fe9a97c7e6fe318a1f63e1d32d7aed7289fef74f932a3a80eb48f129f57285e"
+        }
+      },
+      {
+        "id": "T12",
+        "revision": 1,
+        "accessible": true,
+        "title": "Fast screen colour check",
+        "preconditions": [
+          {
+            "id": "T12.P1",
+            "kind": "visual",
+            "text": "Open the label-request screen."
+          }
+        ],
+        "assertions": [
+          {
+            "id": "T12.A1",
+            "text": "The fast and easy screen uses the expected title and colour.",
+            "kind": "visual",
+            "anchors": []
+          }
+        ],
+        "source": {
+          "id": "synthetic:T12",
+          "hash": "2ebc66e377fce776e4ae3c7a3f7db58298ce51e6834802aa68b51b33fc168761"
+        }
+      }
+    ],
+    "runs": [
+      {
+        "id": "RUN-T8-1",
+        "testId": "T8",
+        "testSourceId": "synthetic:T8",
+        "testRevision": 1,
+        "testHash": "cacf4d2db5f1795ecc44d090897a8611b6135c09f5794e89dfe4405eb1f0952d",
+        "softwareBaseline": "APP-0",
+        "fictional": true,
+        "outcome": "pass",
+        "measurements": {
+          "scope": "local-mock",
+          "concurrency": 5,
+          "successfulRequestsPerClient": [
+            40,
+            40,
+            40,
+            40,
+            40
+          ],
+          "successfulRequests": 200,
+          "maxAcknowledgementMs": 2000
+        },
+        "source": {
+          "id": "synthetic:RUN-T8-1",
+          "hash": "949926511bea91f711fd68b70fc71d6b599ec6bcba80d8af0e545eb381741435"
+        }
+      },
+      {
+        "id": "RUN-T11-1",
+        "testId": "T11",
+        "testSourceId": "synthetic:T11",
+        "testRevision": 1,
+        "testHash": "2fe9a97c7e6fe318a1f63e1d32d7aed7289fef74f932a3a80eb48f129f57285e",
+        "softwareBaseline": "APP-1",
+        "fictional": true,
+        "outcome": "pass",
+        "measurements": {
+          "scope": "local-mock",
+          "concurrency": 5,
+          "successfulRequestsPerClient": [
+            40,
+            40,
+            40,
+            40,
+            40
+          ],
+          "successfulRequests": 200,
+          "maxAcknowledgementMs": 2000
+        },
+        "source": {
+          "id": "synthetic:RUN-T11-1",
+          "hash": "e96f356f76932a39e27654911a85cf8792d4e87af1f31cf45cec7ef361891a0d"
+        }
+      }
+    ]
+  }
+}

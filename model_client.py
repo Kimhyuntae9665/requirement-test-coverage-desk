@@ -1,5 +1,5 @@
 """Optional bounded existing-local-model evaluation. Does not execute service tests."""
-import fcntl, json, os, socket, stat, time, urllib.request, urllib.error
+import fcntl, hashlib, json, os, socket, stat, time, urllib.request, urllib.error
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -60,7 +60,11 @@ SYSTEM = '''Review synthetic requirement facets against test preconditions and a
 SCHEMA = {'type':'object','properties':{'proposals':{'type':'array','items':{'type':'object','properties':{'requirementId':{'type':'string'},'testId':{'type':'string'},'facetIds':{'type':'array','items':{'type':'string'}},'spans':{'type':'array','items':{'type':'object','properties':{'facetId':{'type':'string'},'assertionId':{'type':'string'},'start':{'type':'integer'},'end':{'type':'integer'},'text':{'type':'string'}},'required':['facetId','assertionId','start','end','text']} }},'required':['requirementId','testId','facetIds','spans']}}},'required':['proposals']}
 
 def main():
-    source=json.loads((ROOT/'artifacts/model-input.json').read_text())
+    source_text=(ROOT/'artifacts/model-input.json').read_text()
+    source=json.loads(source_text)
+    snapshot=json.loads((ROOT/'artifacts/source-snapshot.json').read_text())
+    if hashlib.sha256(source_text.encode()).hexdigest()!=snapshot['modelInputDigest']:
+        raise RuntimeError('model_input_digest_mismatch')
     dest=ROOT/'artifacts/model-attempts'
     dest.mkdir(parents=True,exist_ok=True)
     for test in source['tests']:
@@ -69,7 +73,7 @@ def main():
             raise RuntimeError('attempt_already_exists_no_overwrite')
         content={'requirements':source['requirements'],'test':test}
         payload={'model':MODEL,'messages':[{'role':'system','content':SYSTEM},{'role':'user','content':json.dumps(content)}],'format':SCHEMA,'stream':False,'think':False,'truncate':False,'shift':False,'keep_alive':'30s','options':{'num_ctx':4096,'num_predict':512,'temperature':0,'seed':42}}
-        record={'phase':'evaluation','developmentCalls':0,'testId':test['id'],'model':MODEL,'contextLimit':4096,'outputLimit':512,'timeoutSeconds':60,'request':payload}
+        record={'phase':'evaluation','developmentCalls':0,'testId':test['id'],'model':MODEL,'contextLimit':4096,'outputLimit':512,'timeoutSeconds':60,'sourceCommit':snapshot['sourceCommit'],'modelInputDigest':snapshot['modelInputDigest'],'request':payload}
         stop=False
         try:
             record.update(call(payload))
@@ -82,11 +86,12 @@ def main():
         print(test['id'],record['status'],flush=True)
         if stop:
             break
-    # If barrier durability failed, remain alive holding lease for manual recovery.
-    if HELD:
-        print('Barrier write failed: retaining inference lease; manual recovery required.',flush=True)
-        while True:
+def run():
+    try:
+        main()
+    finally:
+        # Diagnostics and artifact writes may fail too. No IO before retention.
+        while HELD:
             time.sleep(30)
 
-if __name__=='__main__':
-    main()
+if __name__=='__main__':run()

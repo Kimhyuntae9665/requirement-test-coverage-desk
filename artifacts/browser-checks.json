@@ -1,0 +1,23 @@
+{
+  "actualBrowser": "Playwright Chromium",
+  "flows": [
+    "zero original",
+    "proposal acceptance",
+    "repeated acceptance idempotent",
+    "requirement revision stale",
+    "fictional current run",
+    "2001 boundary failure",
+    "APP-0 stale",
+    "access revoked",
+    "injected invalid JSON",
+    "injected timeout",
+    "recorded Qwen artifact",
+    "assertions removed"
+  ],
+  "widths": [
+    360,
+    390
+  ],
+  "modelCalledDuringBrowserCapture": false,
+  "actualServicePerformanceMeasured": false
+}
