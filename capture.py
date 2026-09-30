@@ -16,7 +16,7 @@ async def main():
         await page.goto(url);await page.wait_for_selector('#matrix tr');await page.locator('#reset').click();await page.wait_for_timeout(250);await page.screenshot(path=str(out/'01-original.png'),full_page=True)
         await page.locator('#propose').click();await page.wait_for_timeout(400)
         await page.locator('#links button').click();await page.wait_for_timeout(300)
-        assert 'complete' in await page.locator('#matrix tr').first.inner_text()
+        assert 'accepted' in await page.locator('#matrix tr').first.inner_text()
         await page.evaluate("fetch('/api/accept',{method:'POST',body:JSON.stringify({requirementId:'R1',testId:'T3'})})")
         await page.reload();await page.wait_for_selector('#matrix tr');assert '1' in await page.locator('#stats .stat').nth(2).inner_text()
         await page.screenshot(path=str(out/'02-accepted.png'),full_page=True)
@@ -44,6 +44,11 @@ async def main():
         assert 'Assertions removed' in await page.locator('#evidence').inner_text()
         await page.screenshot(path=str(out/'11-assertions-removed.png'),full_page=True)
         await page.locator('#reset').click();await page.wait_for_timeout(600)
+        source=page.locator('button.source-link').first;await source.focus();await page.keyboard.press('Enter');await page.wait_for_timeout(200)
+        assert await page.locator('#test').input_value()=='T2'
+        requirement=page.locator('summary').first;await requirement.focus();await page.keyboard.press('Enter')
+        assert await page.locator('details').first.evaluate('(n)=>n.open')
+        await page.screenshot(path=str(out/'12-keyboard-source.png'),full_page=True)
         video=page.video;await ctx.close();await video.save_as(str(out/'review-demo.webm'))
         for width in [360,390]:
             mobile=await browser.new_page(viewport={'width':width,'height':950},device_scale_factor=1)
@@ -56,6 +61,6 @@ async def main():
         diagram=await browser.new_page(viewport={'width':420,'height':700})
         await diagram.set_content('<!doctype html><body style="margin:0"><img id="graph" width="420" height="700" src="data:image/svg+xml;base64,'+__import__('base64').b64encode((ROOT/'docs/architecture.svg').read_bytes()).decode()+'"></body>');await diagram.locator('#graph').evaluate('(img)=>img.decode()');await diagram.screenshot(path=str(ROOT/'docs/architecture.png'))
         await browser.close()
-    (ROOT/'artifacts/browser-checks.json').write_text(json.dumps({'actualBrowser':'Playwright Chromium','flows':['zero original','proposal acceptance','repeated acceptance idempotent','requirement revision stale','fictional current run','2001 boundary failure','APP-0 stale','access revoked','injected invalid JSON','injected timeout','recorded Qwen artifact','assertions removed'],'widths':[360,390],'modelCalledDuringBrowserCapture':False,'actualServicePerformanceMeasured':False},indent=2))
+    (ROOT/'artifacts/browser-checks.json').write_text(json.dumps({'actualBrowser':'Playwright Chromium','flows':['zero original','proposal acceptance','repeated acceptance idempotent','requirement revision stale','fictional current run','2001 boundary failure','APP-0 stale','access revoked','injected invalid JSON','injected timeout','recorded Qwen artifact','assertions removed','keyboard original source navigation'],'nativeFacetRows':11,'separateDefinitionAcceptanceRunColumns':True,'widths':[360,390],'modelCalledDuringBrowserCapture':False,'actualServicePerformanceMeasured':False},indent=2))
 
 if __name__=='__main__':asyncio.run(main())

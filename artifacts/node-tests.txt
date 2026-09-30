@@ -2,107 +2,107 @@ TAP version 13
 # Subtest: frozen original gold exactly matches the explicit-link definition baseline
 ok 1 - frozen original gold exactly matches the explicit-link definition baseline
   ---
-  duration_ms: 1.879205
+  duration_ms: 1.871294
   ...
 # Subtest: fixtures are fresh, deeply frozen, source integrity checked and original gold is unused at runtime
 ok 2 - fixtures are fresh, deeply frozen, source integrity checked and original gold is unused at runtime
   ---
-  duration_ms: 1.816863
+  duration_ms: 1.808432
   ...
 # Subtest: titles, released precondition, configuration values and vague draft establish no coverage
 ok 3 - titles, released precondition, configuration values and vague draft establish no coverage
   ---
-  duration_ms: 0.563927
+  duration_ms: 0.562936
   ...
 # Subtest: partial definitions and complementary accepted union never manufacture absent runs
 ok 4 - partial definitions and complementary accepted union never manufacture absent runs
   ---
-  duration_ms: 3.130632
+  duration_ms: 3.162011
   ...
 # Subtest: a proposed supported link carries no authority before human review
 ok 5 - a proposed supported link carries no authority before human review
   ---
-  duration_ms: 0.783053
+  duration_ms: 0.815584
   ...
 # Subtest: unlisted pairs are unsupported rather than contradictory
 ok 6 - unlisted pairs are unsupported rather than contradictory
   ---
-  duration_ms: 0.301879
+  duration_ms: 0.301898
   ...
 # Subtest: IDs, revision, baseline, exact span context and assertion source are validated
 ok 7 - IDs, revision, baseline, exact span context and assertion source are validated
   ---
-  duration_ms: 0.69834
+  duration_ms: 0.705411
   ...
 # Subtest: changed R1 code invalidates previous review and does not retain old error assertion support
 ok 8 - changed R1 code invalidates previous review and does not retain old error assertion support
   ---
-  duration_ms: 2.958107
+  duration_ms: 2.958475
   ...
 # Subtest: removing T3 assertions loses facets despite unchanged title and cannot preserve cached review authority
 ok 9 - removing T3 assertions loses facets despite unchanged title and cannot preserve cached review authority
   ---
-  duration_ms: 2.121442
+  duration_ms: 2.08057
   ...
 # Subtest: fictional run provenance and actual test execution remain separate; old APP-0 never verifies APP-1
 ok 10 - fictional run provenance and actual test execution remain separate; old APP-0 never verifies APP-1
   ---
-  duration_ms: 0.421122
+  duration_ms: 0.407522
   ...
 # Subtest: exact <= boundary passes 2000 and rejects 2001; strict < boundary rejects 2000
 ok 11 - exact <= boundary passes 2000 and rejects 2001; strict < boundary rejects 2000
   ---
-  duration_ms: 2.487433
+  duration_ms: 2.493332
   ...
 # Subtest: test revision and software baseline mismatch each block current run eligibility
 ok 12 - test revision and software baseline mismatch each block current run eligibility
   ---
-  duration_ms: 0.495515
+  duration_ms: 0.478493
   ...
 # Subtest: configuration or missing/incomplete load measurements cannot count as performance evidence
 ok 13 - configuration or missing/incomplete load measurements cannot count as performance evidence
   ---
-  duration_ms: 0.390962
+  duration_ms: 0.381741
   ...
 # Subtest: access revocation removes source details, count hints, facets and cached authority
 ok 14 - access revocation removes source details, count hints, facets and cached authority
   ---
-  duration_ms: 3.019568
+  duration_ms: 2.878433
   ...
 # Subtest: model timeout, invalid JSON, invalid shape and structurally invalid proposals are explicit states
 ok 15 - model timeout, invalid JSON, invalid shape and structurally invalid proposals are explicit states
   ---
-  duration_ms: 0.846715
+  duration_ms: 0.826824
   ...
 # Subtest: source identity changes cannot preserve accepted review authority or source integrity
 ok 16 - source identity changes cannot preserve accepted review authority or source integrity
   ---
-  duration_ms: 0.919487
+  duration_ms: 0.921956
   ...
 # Subtest: run source identity and test-source provenance are independently bound
 ok 17 - run source identity and test-source provenance are independently bound
   ---
-  duration_ms: 0.784073
+  duration_ms: 0.829584
   ...
 # Subtest: a passing unrelated run never verifies another requirement or a draft
 ok 18 - a passing unrelated run never verifies another requirement or a draft
   ---
-  duration_ms: 0.434873
+  duration_ms: 0.443193
   ...
 # Subtest: HTTP repeated decisions, source staleness, revoked access, failures and origin guard
 ok 19 - HTTP repeated decisions, source staleness, revoked access, failures and origin guard
   ---
-  duration_ms: 91.238258
+  duration_ms: 93.159322
   ...
 # Subtest: archived model outputs retain captured source versions after current definition changes
 ok 20 - archived model outputs retain captured source versions after current definition changes
   ---
-  duration_ms: 1.923666
+  duration_ms: 1.853343
   ...
 # Subtest: request tampering and malformed model entries are recorded as rejected evidence
 ok 21 - request tampering and malformed model entries are recorded as rejected evidence
   ---
-  duration_ms: 0.203606
+  duration_ms: 0.192736
   ...
 1..21
 # tests 21
@@ -112,4 +112,4 @@ ok 21 - request tampering and malformed model entries are recorded as rejected e
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 185.66009
+# duration_ms 171.368703

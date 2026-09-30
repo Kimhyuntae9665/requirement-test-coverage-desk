@@ -4,7 +4,21 @@ const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefine
 async function request(path,input){try{const r=await fetch('/api/'+path,input?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(input)}:{});const result=await r.json();if(!r.ok)throw Error(result.error);state=result;render();$('toast').textContent='';}catch(e){$('toast').textContent=e.message;}}
 function render(){
  const c=state.summary.counts;$('stats').replaceChildren(...[['Requirements',c.requirements],['Accessible tests',c.accessibleTests],['Accepted links',c.acceptedLinks],['Stale reviews',c.staleReviews]].map(([label,value])=>{const n=el('div',undefined,'stat');n.append(el('b',value),el('span',label));return n;}));
- $('matrix').replaceChildren(...state.summary.requirements.map(row=>{const tr=el('tr'),title=el('td',row.requirementId+' · '+row.title);title.append(el('small',row.status+' · revision '+state.data.requirements.find(r=>r.id===row.requirementId).revision));const req=state.data.requirements.find(r=>r.id===row.requirementId);const details=el('details');details.append(el('summary','Acceptance source'),el('p',req.text));title.append(details);const facets=el('td');if(!row.facetIds.length)facets.append(el('span','Clarification required','missing'));for(const f of row.facetIds)facets.append(el('span',(row.coveredFacetIds.includes(f)?'● ':'○ ')+f,row.coveredFacetIds.includes(f)?'facet pass':'facet missing'));const def=el('td');def.append(el('span',row.definition,'status'));if(row.staleReviewCount)def.append(el('small',row.staleReviewCount+' stale decision(s)'));if(row.links.length)def.append(el('small',row.links.map(l=>l.testId).join(' + ')));const run=el('td');run.append(el('span',row.execution,'status'));run.append(el('small',row.execution==='fixture-pass'?'FICTIONAL · not measured here':row.execution==='unavailable'?'No eligible current execution':row.clarification||'Review source / baseline'));tr.append(title,facets,def,run);return tr;}));
+ $('matrix').replaceChildren(...state.summary.requirements.flatMap(row=>{
+  const req=state.data.requirements.find(r=>r.id===row.requirementId);
+  return (req.facets.length?req.facets:[{id:null,text:'Clarify measurable acceptance threshold'}]).map(f=>{
+   const tr=el('tr');const title=el('td',row.requirementId+(f.id?' / '+f.id:'')+' · '+req.title);title.append(el('small',f.text));
+   const details=el('details');details.append(el('summary','Original requirement'),el('p',req.text),el('code',req.source.id+' · rev '+req.revision+' · '+state.data.requirementBaseline+' · SHA256 '+req.source.hash));title.append(details);
+   const support=el('td');const candidates=state.definitionSupport.filter(p=>p.requirementId===req.id&&p.facetIds.includes(f.id));
+   support.append(el('span',!f.id?'clarify':candidates.length?'assertion support':'zero','status'));
+   for(const p of candidates){const b=el('button',p.testId+' source','source-link');b.onclick=()=>{selected=p.testId;$('test').value=selected;renderEvidence();$('test').focus();};support.append(b);}support.append(el('small','Definitions only · no run claim'));
+   const accepted=el('td');const links=row.links.filter(l=>l.facetIds.includes(f.id));accepted.append(el('span',!f.id?'clarify':links.length?'accepted':'unaccepted','status'));
+   if(links.length)accepted.append(el('small',links.map(l=>l.testId).join(' + ')));else if(row.staleReviewCount)accepted.append(el('small',row.staleReviewCount+' stale decision(s)'));
+   const statuses=links.map(l=>l.execution.status);const status=!f.id?'unknown':statuses.includes('fixture-pass')?'fixture-pass':statuses.some(s=>['fixture-fail','conflict'].includes(s))?'conflict':statuses.includes('stale')?'stale':'unavailable';
+   const run=el('td');run.append(el('span',status,'status'),el('small',status==='fixture-pass'?'FICTIONAL · not measured here':status==='unavailable'?'No accepted compatible execution':req.clarification||'Review source / run baseline'));
+   tr.append(title,support,accepted,run);return tr;
+  });
+ }));
  if(!state.data.tests.some(t=>t.id===selected))selected=state.data.tests[0]?.id;
  $('test').replaceChildren(...state.data.tests.map(t=>{const n=el('option',t.id+' · '+t.title);n.value=t.id;return n;}));$('test').value=selected;renderEvidence();
  $('modelstatus').textContent=state.modelState.status+(state.modelState.message?' · '+state.modelState.message:'');

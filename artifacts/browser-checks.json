@@ -12,8 +12,11 @@
     "injected invalid JSON",
     "injected timeout",
     "recorded Qwen artifact",
-    "assertions removed"
+    "assertions removed",
+    "keyboard original source navigation"
   ],
+  "nativeFacetRows": 11,
+  "separateDefinitionAcceptanceRunColumns": true,
   "widths": [
     360,
     390

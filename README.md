@@ -4,7 +4,7 @@
 
 [Editable SVG](docs/architecture.svg) · [Glyph and media provenance](docs/asset-provenance.md)
 
-A QA engineer reviews requirement facets against exact test assertions, accepts semantic coverage, and sees missing, stale or conflicting evidence. A requirement title appearing in a test never establishes coverage. A passing old run never verifies the current application baseline.
+A QA engineer reviews requirement facets against exact test assertions, accepts semantic coverage, and sees missing, stale or conflicting evidence. The native table uses one row per facet and separate columns for definition support, reviewer acceptance and compatible run evidence. Original requirement details and test-source navigation support keyboard focus. A requirement title appearing in a test never establishes coverage. A passing old run never verifies the current application baseline.
 
 This is an original **synthetic label-request service** fixture. There is no factory printing, vehicle-safety verification, Codebeamer/ALM integration, autonomous test execution, or certification. The native browser desk uses Node's standard library; twelve definitions need no embedding or vector database.
 

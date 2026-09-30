@@ -7,7 +7,7 @@ const root=fileURLToPath(new URL('.',import.meta.url));
 export function createDesk(){
  let data=fixtures(), reviews=[], proposals=[], modelState={status:'not_requested',message:'Optional Qwen evaluation is offline; no model called by this desk.'};
  const visible=()=>({...data,tests:data.tests.filter(t=>t.accessible),runs:data.runs.filter(r=>data.tests.some(t=>t.id===r.testId&&t.accessible))});
- const state=()=>({data:visible(),reviews:reviews.filter(r=>data.tests.some(t=>t.id===r.proposal?.testId&&t.accessible)),proposals:proposals.filter(p=>data.tests.some(t=>t.id===p.testId&&t.accessible)).map(p=>({...p,validation:validateProposal(data,p)})),summary:summarize(data,reviews),testEvidence:data.tests.filter(t=>t.accessible).map(t=>({testId:t.id,requirements:data.requirements.map(r=>({requirementId:r.id,...executionEvidence(data,t.id,r.id)}))})),modelState});
+ const state=()=>({data:visible(),definitionSupport:proposeExplicit(data),reviews:reviews.filter(r=>data.tests.some(t=>t.id===r.proposal?.testId&&t.accessible)),proposals:proposals.filter(p=>data.tests.some(t=>t.id===p.testId&&t.accessible)).map(p=>({...p,validation:validateProposal(data,p)})),summary:summarize(data,reviews),testEvidence:data.tests.filter(t=>t.accessible).map(t=>({testId:t.id,requirements:data.requirements.map(r=>({requirementId:r.id,...executionEvidence(data,t.id,r.id)}))})),modelState});
  return http.createServer(async(req,res)=>{
   const json=(code,body)=>{res.writeHead(code,{'Content-Type':'application/json','Cache-Control':'no-store'});res.end(JSON.stringify(body));};
   try {
